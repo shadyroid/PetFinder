@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">Pet Finder</string>
+    <string name="pets">Pets</string>
+    <string name="name">Name</string>
+    <string name="gender">gender</string>
+    <string name="type">Type</string>
+    <string name="pet_details">Pet details</string>
+    <string name="size">Size</string>
+    <string name="color">Color</string>
+    <string name="address">Address</string>
+    <string name="pet_website">Pet\'s website</string>
 </resources>

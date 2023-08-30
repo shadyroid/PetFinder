@@ -15,7 +15,7 @@
         android:theme="@style/Theme.PetFinder"
         tools:targetApi="31" >
         <activity
-            android:name=".PetDetailsActivity"
+            android:name=".mvvm.pet_detials.PetDetailsActivity"
             android:exported="false" >
             <meta-data
                 android:name="android.app.lib_name"
