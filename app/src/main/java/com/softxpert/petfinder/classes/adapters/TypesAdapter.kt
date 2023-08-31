@@ -5,11 +5,13 @@ import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
 import com.softxpert.petfinder.R
-import com.softxpert.petfinder.classes.rest.models.beans.TypeBean
+import com.softxpert.domain.entity.beans.TypeBean
 import com.softxpert.petfinder.databinding.ItemTypeBinding
+import javax.inject.Inject
 
-class TypesAdapter(private val listener: Listener) :
+class TypesAdapter @Inject constructor() :
     RecyclerView.Adapter<TypesAdapter.ViewHolder>() {
+     lateinit var listener: Listener
     private val data: MutableList<TypeBean> = ArrayList()
     var selectedIndex: Int = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(

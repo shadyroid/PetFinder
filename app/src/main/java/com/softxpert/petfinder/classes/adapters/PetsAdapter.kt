@@ -4,12 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.softxpert.domain.entity.beans.PetBean
 import com.softxpert.petfinder.R
-import com.softxpert.petfinder.classes.rest.models.beans.PetBean
 import com.softxpert.petfinder.databinding.ItemPetBinding
+import javax.inject.Inject
 
-class PetsAdapter(private val listener: Listener) :
+class PetsAdapter @Inject constructor() :
     RecyclerView.Adapter<PetsAdapter.ViewHolder>() {
+    lateinit var listener: Listener
     private val data: MutableList<PetBean> = ArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewPet: Int): ViewHolder = ViewHolder(
@@ -26,9 +28,12 @@ class PetsAdapter(private val listener: Listener) :
             .placeholder(R.mipmap.ic_launcher)
             .error(R.mipmap.ic_launcher)
             .into(holder.binding.ivImage)
-        holder.binding.tvName.text = "${holder.itemView.context.getString(R.string.name)}: ${data[position].displayName}"
-        holder.binding.tvGender.text = "${holder.itemView.context.getString(R.string.gender)}: ${data[position].displayGender}"
-        holder.binding.tvType.text = "${holder.itemView.context.getString(R.string.type)}${data[position].displayType}"
+        holder.binding.tvName.text =
+            "${holder.itemView.context.getString(R.string.name)}: ${data[position].displayName}"
+        holder.binding.tvGender.text =
+            "${holder.itemView.context.getString(R.string.gender)}: ${data[position].displayGender}"
+        holder.binding.tvType.text =
+            "${holder.itemView.context.getString(R.string.type)}${data[position].displayType}"
 
     }
 
