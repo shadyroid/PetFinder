@@ -11,7 +11,7 @@ import javax.inject.Inject
 
 class TypesAdapter @Inject constructor() :
     RecyclerView.Adapter<TypesAdapter.ViewHolder>() {
-     lateinit var listener: Listener
+    lateinit var listener: Listener
     private val data: MutableList<TypeBean> = ArrayList()
     var selectedIndex: Int = 0
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(

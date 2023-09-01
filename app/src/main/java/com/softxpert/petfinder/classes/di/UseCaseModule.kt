@@ -17,6 +17,7 @@ object UseCaseModule {
     fun providePetsUseCase(petsRepo: PetsRepo): PetsUseCase {
         return PetsUseCase(petsRepo)
     }
+
     @Provides
     fun provideAuthUseCase(authRepo: AuthRepo): AuthUseCase {
         return AuthUseCase(authRepo)

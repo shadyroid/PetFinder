@@ -31,12 +31,12 @@ class PetsAdapter @Inject constructor(@ActivityContext val context: Context) :
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         loadImage(data[position].displaySmallImage, holder.binding.ivImage)
 
-        holder.binding.tvName.text =context.getString(R.string.name_is,data[position].displayName)
+        holder.binding.tvName.text = context.getString(R.string.name_is, data[position].displayName)
 
         holder.binding.tvGender.text =
-            context.getString(R.string.gender_is,data[position].displayGender)
+            context.getString(R.string.gender_is, data[position].displayGender)
         holder.binding.tvType.text =
-            context.getString(R.string.type_is,data[position].displayType)
+            context.getString(R.string.type_is, data[position].displayType)
         holder.binding.shimmer.root.visibility =
             if (!isFinishedLoading && position == data.size - 1) View.VISIBLE else View.GONE
     }
@@ -51,7 +51,7 @@ class PetsAdapter @Inject constructor(@ActivityContext val context: Context) :
         Glide.with(context)
             .load(imagePath)
             .placeholder(drawable)
-            .error(R.drawable.app_logo)
+            .error(R.drawable.placeholder)
             .into(imageView)
     }
 

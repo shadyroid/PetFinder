@@ -29,7 +29,7 @@
                 android:layout_height="128dp"
                 android:layout_margin="16dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/app_logo"
+                android:src="@drawable/placeholder"
                 app:tint="@color/shimmer_placeholder" />
 
             <LinearLayout

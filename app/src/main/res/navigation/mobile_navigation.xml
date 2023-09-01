@@ -9,7 +9,7 @@
         android:id="@+id/nav_pets"
         android:name="com.softxpert.petfinder.ui.pets.PetsFragment"
         android:label="@string/pets"
-        tools:layout="@layout/fragment_pets" >
+        tools:layout="@layout/fragment_pets">
         <action
             android:id="@+id/action_nav_pets_to_nav_pet_details"
             app:destination="@id/nav_pet_details" />
@@ -20,7 +20,7 @@
         android:name="com.softxpert.petfinder.ui.pet_detials.PetDetailsFragment"
         android:label="@string/pet_details"
 
-        tools:layout="@layout/fragment_pet_details" >
+        tools:layout="@layout/fragment_pet_details">
         <argument
             android:name="pet"
             app:argType="com.softxpert.domain.entity.beans.PetBean" />

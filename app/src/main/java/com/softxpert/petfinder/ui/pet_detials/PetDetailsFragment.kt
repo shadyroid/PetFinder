@@ -42,12 +42,12 @@ class PetDetailsFragment : Fragment() {
     private fun setData() {
         Glide.with(this)
             .load(petBean.displayMediumImage)
-            .placeholder(R.drawable.app_logo)
-            .error(R.drawable.app_logo)
+            .placeholder(R.drawable.placeholder)
+            .error(R.drawable.placeholder)
             .into(binding.ivImage)
         binding.tvName.text = getString(R.string.name_is, petBean.displayName)
         binding.tvSize.text = getString(R.string.size_is, petBean.displaySize)
-        binding.tvColor.text = getString(R.string.color_is, petBean.displayColor)
+        binding.tvPrimaryColor.text = getString(R.string.color_is, petBean.displayPrimaryColor)
         binding.tvAddress.text = getString(R.string.address_is, petBean.displayAddress)
         binding.btnPetWebsite.setOnClickListener { openLink(petBean.url!!) }
     }

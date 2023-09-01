@@ -32,7 +32,6 @@ class PetsViewModel @Inject constructor(
     val authResponseMutableStateFlow: StateFlow<AuthResponse?> = _authResponseMutableStateFlow
 
 
-
     fun requestTypes() {
         viewModelScope.launch(Dispatchers.IO) {
             try {

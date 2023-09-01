@@ -28,7 +28,7 @@ data class PetBean(
     val displaySize: String
         get() = size.takeIf { !it.isNullOrEmpty() } ?: "NA"
 
-    val displayColor: String
+    val displayPrimaryColor: String
         get() = colors?.primary.takeIf { it?.isNotEmpty() == true } ?: "NA"
 
     val displayAddress: String
