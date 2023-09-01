@@ -1,7 +1,6 @@
 package com.softxpert.petfinder.ui.pets
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,11 +37,12 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
     @Inject
     lateinit var preferencesHelper: PreferencesHelper
 
-    private var currentPage = 0
+    private var currentPage = 1
 
     @Inject
     lateinit var petsAdapter: PetsAdapter
     private lateinit var endlessRecyclerViewScrollListener: EndlessRecyclerViewScrollListener
+
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -51,32 +51,31 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
     ): View {
         _binding = FragmentPetsBinding.inflate(inflater, container, false)
 
-        Log.d("TAG", "Shaduy onCreateView: ")
-
         return binding.root
     }
 
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.d("TAG", "Shaduy onViewCreated: ")
         init()
     }
 
     private fun init() {
-        initObserves()
         binding.swipeRefreshLayout.setOnRefreshListener {
             resetState()
             binding.swipeRefreshLayout.isRefreshing = false
         }
         initTypesAdapter()
         initPetsAdapter()
-        requestTypes()
+        if (!viewModel.isFragmentInitializedBefore) {
+            viewModel.isFragmentInitializedBefore = true
+            initObserves()
+            requestTypes()
+        }
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
-        Log.d("TAG", "onDestroyView: ")
         _binding = null
     }
 
@@ -88,15 +87,14 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
 
     private fun initPetsAdapter() {
         petsAdapter.listener = this
-        endlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener() {
+        binding.rvPets.adapter = petsAdapter
+        endlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(currentPage) {
             override fun onLoadMore(page: Int) {
                 currentPage = page
                 requestPets()
             }
         }
-        binding.rvPets.adapter = petsAdapter
         binding.rvPets.addOnScrollListener(endlessRecyclerViewScrollListener)
-        currentPage = 1
     }
 
     private fun initObserves() {
@@ -123,7 +121,7 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
         requestPets();
     }
 
-    fun requestTypes() {
+    private fun requestTypes() {
         viewModel.requestTypes()
     }
 

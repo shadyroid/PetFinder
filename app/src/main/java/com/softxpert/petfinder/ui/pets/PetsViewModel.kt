@@ -32,6 +32,8 @@ class PetsViewModel @Inject constructor(
     val petsResponseMutableStateFlow: StateFlow<PetsResponse?> = _petsResponseMutableStateFlow
     val authResponseMutableStateFlow: StateFlow<AuthResponse?> = _authResponseMutableStateFlow
 
+    var isFragmentInitializedBefore = false
+
 
     fun requestTypes() {
         viewModelScope.launch(Dispatchers.IO) {

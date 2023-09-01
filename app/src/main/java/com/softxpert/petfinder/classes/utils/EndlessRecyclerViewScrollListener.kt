@@ -23,7 +23,9 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
     // True if we are still waiting for the last set of data to load.
     private var loading = true
 
-    constructor() {}
+    constructor(currentPage:Int) {
+        this.currentPage = currentPage
+    }
     constructor(layoutManager: LinearLayoutManager?) {
         mLayoutManager = layoutManager
     }
