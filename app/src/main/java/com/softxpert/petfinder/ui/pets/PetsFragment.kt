@@ -118,7 +118,7 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
 
     private fun onAuthResponse(response: AuthResponse) {
         preferencesHelper.putAuthToken(response.access_token)
-        requestPets();
+        requestPets()
     }
 
     private fun requestTypes() {

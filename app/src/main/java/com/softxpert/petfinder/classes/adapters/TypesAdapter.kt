@@ -4,8 +4,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
-import com.softxpert.petfinder.R
 import com.softxpert.domain.entity.beans.TypeBean
+import com.softxpert.petfinder.R
 import com.softxpert.petfinder.databinding.ItemTypeBinding
 import javax.inject.Inject
 
@@ -58,8 +58,9 @@ class TypesAdapter @Inject constructor() :
 
         private fun onItemClick() {
             listener.onTypeClick(data[bindingAdapterPosition].name)
-            selectedIndex = bindingAdapterPosition;
-            notifyDataSetChanged()
+            notifyItemChanged(selectedIndex)
+            selectedIndex = bindingAdapterPosition
+            notifyItemChanged(selectedIndex)
         }
     }
 }

@@ -5,17 +5,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 
-abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener {
+abstract class EndlessRecyclerViewScrollListener(// The current offset index of data you have loaded
+    private var currentPage: Int
+) : RecyclerView.OnScrollListener() {
     // Sets the starting page index
     private val startingPageIndex = 1
-    var mLayoutManager: RecyclerView.LayoutManager? = null
+    private var mLayoutManager: RecyclerView.LayoutManager? = null
 
     // The minimum amount of items to have below your current scroll position
     // before loading more.
     private var visibleThreshold = 5
-
-    // The current offset index of data you have loaded
-    private var currentPage = 1
 
     // The total number of items in the dataset after the last load
     private var previousTotalItemCount = 0
@@ -23,28 +22,7 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
     // True if we are still waiting for the last set of data to load.
     private var loading = true
 
-    constructor(currentPage:Int) {
-        this.currentPage = currentPage
-    }
-    constructor(layoutManager: LinearLayoutManager?) {
-        mLayoutManager = layoutManager
-    }
-
-    constructor(layoutManager: GridLayoutManager) {
-        setGridLayoutManager(layoutManager)
-    }
-
-    fun setGridLayoutManager(layoutManager: GridLayoutManager) {
-        mLayoutManager = layoutManager
-        visibleThreshold = visibleThreshold * layoutManager.spanCount
-    }
-
-    constructor(layoutManager: StaggeredGridLayoutManager) {
-        mLayoutManager = layoutManager
-        visibleThreshold = visibleThreshold * layoutManager.spanCount
-    }
-
-    fun getLastVisibleItem(lastVisibleItemPositions: IntArray): Int {
+    private fun getLastVisibleItem(lastVisibleItemPositions: IntArray): Int {
         var maxSize = 0
         for (i in lastVisibleItemPositions.indices) {
             if (i == 0) {
@@ -63,17 +41,23 @@ abstract class EndlessRecyclerViewScrollListener : RecyclerView.OnScrollListener
         if (mLayoutManager == null) mLayoutManager = recyclerView.layoutManager
         var lastVisibleItemPosition = 0
         val totalItemCount = mLayoutManager!!.itemCount
-        if (mLayoutManager is StaggeredGridLayoutManager) {
-            val lastVisibleItemPositions =
-                (mLayoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(null)
-            // get maximum element within the list
-            lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
-        } else if (mLayoutManager is GridLayoutManager) {
-            lastVisibleItemPosition =
-                (mLayoutManager as GridLayoutManager).findLastVisibleItemPosition()
-        } else if (mLayoutManager is LinearLayoutManager) {
-            lastVisibleItemPosition =
-                (mLayoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+        when (mLayoutManager) {
+            is StaggeredGridLayoutManager -> {
+                val lastVisibleItemPositions =
+                    (mLayoutManager as StaggeredGridLayoutManager).findLastVisibleItemPositions(null)
+                // get maximum element within the list
+                lastVisibleItemPosition = getLastVisibleItem(lastVisibleItemPositions)
+            }
+
+            is GridLayoutManager -> {
+                lastVisibleItemPosition =
+                    (mLayoutManager as GridLayoutManager).findLastVisibleItemPosition()
+            }
+
+            is LinearLayoutManager -> {
+                lastVisibleItemPosition =
+                    (mLayoutManager as LinearLayoutManager).findLastVisibleItemPosition()
+            }
         }
 
         // If the total item count is zero and the previous isn't, assume the

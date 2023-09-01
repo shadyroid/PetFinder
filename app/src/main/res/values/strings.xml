@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Pet Finder</string>
     <string name="pets">Pets</string>
-    <string name="name">Name</string>
-    <string name="gender">gender</string>
-    <string name="type">Type</string>
     <string name="pet_details">Pet details</string>
-    <string name="size">Size</string>
-    <string name="color">Color</string>
-    <string name="address">Address</string>
+
+    <string name="name_is">Name: %1$s</string>
+    <string name="gender_is">Gender: %1$s</string>
+    <string name="type_is">Type: %1$s</string>
+    <string name="size_is">Size: %1$s</string>
+    <string name="color_is">Color: %1$s</string>
+    <string name="address_is">Address: %1$s</string>
+
     <string name="pet_website">Pet\'s website</string>
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

@@ -1,8 +1,6 @@
 package com.softxpert.petfinder.classes.adapters
 
 import android.content.Context
-import android.graphics.Bitmap
-import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +8,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.DataSource
-import com.bumptech.glide.load.engine.GlideException
-import com.bumptech.glide.request.RequestListener
-import com.bumptech.glide.request.target.Target
-import com.facebook.shimmer.Shimmer
-import com.facebook.shimmer.Shimmer.AlphaHighlightBuilder
-import com.facebook.shimmer.ShimmerDrawable
 import com.softxpert.domain.entity.beans.PetBean
 import com.softxpert.petfinder.R
 import com.softxpert.petfinder.databinding.ItemPetBinding
@@ -38,14 +29,14 @@ class PetsAdapter @Inject constructor(@ActivityContext val context: Context) :
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        loadImage(data[position].displaySmallImage,holder.binding.ivImage)
+        loadImage(data[position].displaySmallImage, holder.binding.ivImage)
 
-        holder.binding.tvName.text =
-            "${context.getString(R.string.name)}: ${data[position].displayName}"
+        holder.binding.tvName.text =context.getString(R.string.name_is,data[position].displayName)
+
         holder.binding.tvGender.text =
-            "${context.getString(R.string.gender)}: ${data[position].displayGender}"
+            context.getString(R.string.gender_is,data[position].displayGender)
         holder.binding.tvType.text =
-            "${context.getString(R.string.type)}: ${data[position].displayType}"
+            context.getString(R.string.type_is,data[position].displayType)
         holder.binding.shimmer.root.visibility =
             if (!isFinishedLoading && position == data.size - 1) View.VISIBLE else View.GONE
     }

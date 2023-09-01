@@ -47,10 +47,10 @@ class PetDetailsFragment : Fragment() {
             .placeholder(R.drawable.app_logo)
             .error(R.drawable.app_logo)
             .into(binding.ivImage)
-        binding.tvName.text = "${getString(R.string.name)}: ${petBean.displayName}"
-        binding.tvSize.text = "${getString(R.string.size)}: ${petBean.displaySize}"
-        binding.tvColor.text = "${getString(R.string.color)}: ${petBean.displayColor}"
-        binding.tvAddress.text = "${getString(R.string.address)}: ${petBean.displayAddress}"
+        binding.tvName.text = getString(R.string.name_is,petBean.displayName)
+        binding.tvSize.text = getString(R.string.size_is,petBean.displaySize)
+        binding.tvColor.text = getString(R.string.color_is,petBean.displayColor)
+        binding.tvAddress.text = getString(R.string.address_is,petBean.displayAddress)
         binding.btnPetWebsite.setOnClickListener { openLink(petBean.url!!) }
     }
 

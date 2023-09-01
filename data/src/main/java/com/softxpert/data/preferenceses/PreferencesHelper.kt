@@ -1,7 +1,6 @@
 package com.softxpert.data.preferenceses
 
 import android.content.Context
-import android.content.SharedPreferences
 
 class PreferencesHelper(context: Context) {
     private val preferences = context.getSharedPreferences("softxpert_pet_finder", Context.MODE_PRIVATE)

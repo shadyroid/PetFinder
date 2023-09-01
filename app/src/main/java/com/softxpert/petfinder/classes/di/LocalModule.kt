@@ -1,13 +1,12 @@
 package com.softxpert.petfinder.classes.di
 
 import android.content.Context
+import com.softxpert.data.preferenceses.PreferencesHelper
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.components.SingletonComponent
-import okhttp3.logging.HttpLoggingInterceptor
-import com.softxpert.data.preferenceses.PreferencesHelper
 import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
 @Module

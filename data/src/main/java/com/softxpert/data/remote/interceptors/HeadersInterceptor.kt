@@ -1,4 +1,4 @@
-package com.softxpert.petfinder.classes.rest.Interceptors
+package com.softxpert.data.remote.interceptors
 
 import com.softxpert.data.preferenceses.PreferencesHelper
 import okhttp3.Interceptor

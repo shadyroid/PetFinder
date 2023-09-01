@@ -28,7 +28,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/size" />
+        android:text="@string/size_is" />
 
     <TextView
         android:id="@+id/tv_color"
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/color" />
+        android:text="@string/color_is" />
 
     <TextView
         android:id="@+id/tv_address"
@@ -44,7 +44,7 @@
         android:layout_height="wrap_content"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/address" />
+        android:text="@string/address_is" />
 
     <com.google.android.material.button.MaterialButton
         android:id="@+id/btn_pet_website"

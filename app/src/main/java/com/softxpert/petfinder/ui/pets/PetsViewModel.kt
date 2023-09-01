@@ -14,7 +14,6 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @HiltViewModel
@@ -53,7 +52,7 @@ class PetsViewModel @Inject constructor(
                 if (response.code() != 401) {
                     _petsResponseMutableStateFlow.value = response.body()
                 } else {
-                    requestToken();
+                    requestToken()
                 }
             } catch (e: Exception) {
                 onError(e)
@@ -77,8 +76,8 @@ class PetsViewModel @Inject constructor(
     }
 
 
-    fun onError(e: Throwable) {
-        Log.d("crash_tryObserver", "error : $e")
+    private fun onError(e: Throwable) {
+        Log.d("error ", "error : $e")
     }
 
     fun clear() {
