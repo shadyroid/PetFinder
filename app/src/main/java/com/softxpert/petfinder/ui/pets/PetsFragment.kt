@@ -49,15 +49,11 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPetsBinding.inflate(inflater, container, false)
-
+        if (_binding == null) {
+            _binding = FragmentPetsBinding.inflate(inflater, container, false)
+            init()
+        }
         return binding.root
-    }
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        init()
     }
 
     private fun init() {
@@ -67,16 +63,8 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
         }
         initTypesAdapter()
         initPetsAdapter()
-        if (!viewModel.isFragmentInitializedBefore) {
-            viewModel.isFragmentInitializedBefore = true
-            initObserves()
-            requestTypes()
-        }
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
+        initObserves()
+        requestTypes()
     }
 
 
@@ -88,12 +76,13 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
     private fun initPetsAdapter() {
         petsAdapter.listener = this
         binding.rvPets.adapter = petsAdapter
-        endlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener(currentPage) {
-            override fun onLoadMore(page: Int) {
-                currentPage = page
-                requestPets()
+        endlessRecyclerViewScrollListener =
+            object : EndlessRecyclerViewScrollListener() {
+                override fun onLoadMore(page: Int) {
+                    currentPage = page
+                    requestPets()
+                }
             }
-        }
         binding.rvPets.addOnScrollListener(endlessRecyclerViewScrollListener)
     }
 

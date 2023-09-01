@@ -25,21 +25,19 @@ class PetDetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentPetDetailsBinding.inflate(inflater, container, false)
+        if (_binding == null) {
+            _binding = FragmentPetDetailsBinding.inflate(inflater, container, false)
+            init()
+        }
         return binding.root
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun init() {
         val args = PetDetailsFragmentArgs.fromBundle(requireArguments())
         petBean = args.pet
-
         setData()
     }
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
-    }
+
 
     private fun setData() {
         Glide.with(this)
@@ -47,10 +45,10 @@ class PetDetailsFragment : Fragment() {
             .placeholder(R.drawable.app_logo)
             .error(R.drawable.app_logo)
             .into(binding.ivImage)
-        binding.tvName.text = getString(R.string.name_is,petBean.displayName)
-        binding.tvSize.text = getString(R.string.size_is,petBean.displaySize)
-        binding.tvColor.text = getString(R.string.color_is,petBean.displayColor)
-        binding.tvAddress.text = getString(R.string.address_is,petBean.displayAddress)
+        binding.tvName.text = getString(R.string.name_is, petBean.displayName)
+        binding.tvSize.text = getString(R.string.size_is, petBean.displaySize)
+        binding.tvColor.text = getString(R.string.color_is, petBean.displayColor)
+        binding.tvAddress.text = getString(R.string.address_is, petBean.displayAddress)
         binding.btnPetWebsite.setOnClickListener { openLink(petBean.url!!) }
     }
 
