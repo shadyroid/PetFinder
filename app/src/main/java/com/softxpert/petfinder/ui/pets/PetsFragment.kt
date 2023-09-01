@@ -1,6 +1,7 @@
 package com.softxpert.petfinder.ui.pets
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -48,9 +49,21 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentPetsBinding.inflate(inflater, container, false)
 
+        Log.d("TAG", "Shaduy onCreateView: ")
+
+        return binding.root
+    }
+
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.d("TAG", "Shaduy onViewCreated: ")
+        init()
+    }
+
+    private fun init() {
         initObserves()
         binding.swipeRefreshLayout.setOnRefreshListener {
             resetState()
@@ -59,12 +72,11 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
         initTypesAdapter()
         initPetsAdapter()
         requestTypes()
-
-        return binding.root
     }
 
     override fun onDestroyView() {
         super.onDestroyView()
+        Log.d("TAG", "onDestroyView: ")
         _binding = null
     }
 
@@ -75,8 +87,7 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
     }
 
     private fun initPetsAdapter() {
-        petsAdapter = PetsAdapter()
-        typesAdapter.listener = this
+        petsAdapter.listener = this
         endlessRecyclerViewScrollListener = object : EndlessRecyclerViewScrollListener() {
             override fun onLoadMore(page: Int) {
                 currentPage = page
@@ -133,9 +144,11 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
     }
 
     private fun onPetsResponse(response: PetsResponse) {
-        petsAdapter.addData(
-            response.animals
-        )
+        if (currentPage == 1) {
+            binding.shimmer.visibility = View.GONE
+        }
+        petsAdapter.setFinishedLoading(response.animals.size < 5)
+        petsAdapter.addData(response.animals)
     }
 
     override fun onPetClick(pet: PetBean) {
@@ -166,6 +179,7 @@ class PetsFragment : Fragment(), TypesAdapter.Listener, PetsAdapter.Listener,
         viewModel.clear()
         petsAdapter.clear()
         endlessRecyclerViewScrollListener.resetState()
+        binding.shimmer.visibility = View.VISIBLE
         currentPage = 1
         requestPets()
     }

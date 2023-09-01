@@ -1,18 +1,33 @@
 package com.softxpert.petfinder.classes.adapters
 
+import android.content.Context
+import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.CircularProgressDrawable
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.DataSource
+import com.bumptech.glide.load.engine.GlideException
+import com.bumptech.glide.request.RequestListener
+import com.bumptech.glide.request.target.Target
+import com.facebook.shimmer.Shimmer
+import com.facebook.shimmer.Shimmer.AlphaHighlightBuilder
+import com.facebook.shimmer.ShimmerDrawable
 import com.softxpert.domain.entity.beans.PetBean
 import com.softxpert.petfinder.R
 import com.softxpert.petfinder.databinding.ItemPetBinding
+import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
-class PetsAdapter @Inject constructor() :
+class PetsAdapter @Inject constructor(@ActivityContext val context: Context) :
     RecyclerView.Adapter<PetsAdapter.ViewHolder>() {
     lateinit var listener: Listener
     private val data: MutableList<PetBean> = ArrayList()
+    private var isFinishedLoading = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewPet: Int): ViewHolder = ViewHolder(
         ItemPetBinding.inflate(
@@ -23,19 +38,32 @@ class PetsAdapter @Inject constructor() :
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Glide.with(holder.itemView.context)
-            .load(data[position].displaySmallImage)
-            .placeholder(R.mipmap.ic_launcher)
-            .error(R.mipmap.ic_launcher)
-            .into(holder.binding.ivImage)
-        holder.binding.tvName.text =
-            "${holder.itemView.context.getString(R.string.name)}: ${data[position].displayName}"
-        holder.binding.tvGender.text =
-            "${holder.itemView.context.getString(R.string.gender)}: ${data[position].displayGender}"
-        holder.binding.tvType.text =
-            "${holder.itemView.context.getString(R.string.type)}${data[position].displayType}"
+        loadImage(data[position].displaySmallImage,holder.binding.ivImage)
 
+        holder.binding.tvName.text =
+            "${context.getString(R.string.name)}: ${data[position].displayName}"
+        holder.binding.tvGender.text =
+            "${context.getString(R.string.gender)}: ${data[position].displayGender}"
+        holder.binding.tvType.text =
+            "${context.getString(R.string.type)}: ${data[position].displayType}"
+        holder.binding.shimmer.root.visibility =
+            if (!isFinishedLoading && position == data.size - 1) View.VISIBLE else View.GONE
     }
+
+    private fun loadImage(imagePath: String?, imageView: ImageView) {
+        val drawable = CircularProgressDrawable(
+            context
+        )
+        drawable.centerRadius = 30f
+        drawable.strokeWidth = 5f
+        drawable.start()
+        Glide.with(context)
+            .load(imagePath)
+            .placeholder(drawable)
+            .error(R.drawable.app_logo)
+            .into(imageView)
+    }
+
 
     override fun getItemCount(): Int {
         return data.size
@@ -52,6 +80,11 @@ class PetsAdapter @Inject constructor() :
         val count = data.size
         data.clear()
         notifyItemRangeRemoved(0, count)
+    }
+
+    fun setFinishedLoading(finishedLoading: Boolean) {
+        isFinishedLoading = finishedLoading
+        if (data.isNotEmpty()) notifyItemChanged(data.size - 1)
     }
 
     interface Listener {

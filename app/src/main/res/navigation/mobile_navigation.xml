@@ -19,6 +19,7 @@
         android:id="@+id/nav_pet_details"
         android:name="com.softxpert.petfinder.ui.pet_detials.PetDetailsFragment"
         android:label="@string/pet_details"
+
         tools:layout="@layout/fragment_pet_details" >
         <argument
             android:name="pet"

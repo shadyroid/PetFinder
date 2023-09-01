@@ -2,6 +2,7 @@ package com.softxpert.petfinder.classes.di
 
 import com.softxpert.data.preferenceses.PreferencesHelper
 import com.softxpert.data.remote.ApiService
+import com.softxpert.petfinder.classes.others.CONSTANTS.BACKEND.BASE_URL
 import com.softxpert.petfinder.classes.rest.Interceptors.HeadersInterceptor
 import dagger.Module
 import dagger.Provides
@@ -52,7 +53,7 @@ object NetworkModule {
     @Singleton
     fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
         return Retrofit.Builder()
-            .baseUrl("")
+            .baseUrl(BASE_URL)
             .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()

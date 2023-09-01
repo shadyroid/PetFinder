@@ -18,6 +18,8 @@
 
         <activity
             android:name=".ui.MainActivity"
+            android:theme="@style/Theme.MyApplication.NoActionBar"
+            android:label="@string/app_name"
             android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

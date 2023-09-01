@@ -10,7 +10,6 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.softxpert.domain.entity.beans.PetBean
 import com.softxpert.petfinder.R
-import com.softxpert.petfinder.classes.others.CONSTANTS.INTENT.OBJECT
 import com.softxpert.petfinder.databinding.FragmentPetDetailsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -19,23 +18,24 @@ class PetDetailsFragment : Fragment() {
     private var _binding: FragmentPetDetailsBinding? = null
     private val binding get() = _binding!!
 
-    lateinit var petBean: PetBean
+    private lateinit var petBean: PetBean
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-
         _binding = FragmentPetDetailsBinding.inflate(inflater, container, false)
+        return binding.root
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         val args = PetDetailsFragmentArgs.fromBundle(requireArguments())
         petBean = args.pet
 
         setData()
-        return binding.root
     }
-
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
@@ -44,13 +44,13 @@ class PetDetailsFragment : Fragment() {
     private fun setData() {
         Glide.with(this)
             .load(petBean.displayMediumImage)
-            .placeholder(R.mipmap.ic_launcher)
-            .error(R.mipmap.ic_launcher)
+            .placeholder(R.drawable.app_logo)
+            .error(R.drawable.app_logo)
             .into(binding.ivImage)
         binding.tvName.text = "${getString(R.string.name)}: ${petBean.displayName}"
         binding.tvSize.text = "${getString(R.string.size)}: ${petBean.displaySize}"
-        binding.tvColor.text = "${getString(R.string.color)}${petBean.displayColor}"
-        binding.tvAddress.text = "${getString(R.string.address)}${petBean.displayAddress}"
+        binding.tvColor.text = "${getString(R.string.color)}: ${petBean.displayColor}"
+        binding.tvAddress.text = "${getString(R.string.address)}: ${petBean.displayAddress}"
         binding.btnPetWebsite.setOnClickListener { openLink(petBean.url!!) }
     }
 

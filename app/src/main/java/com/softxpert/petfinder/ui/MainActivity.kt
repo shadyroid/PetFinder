@@ -24,17 +24,9 @@ class MainActivity : AppCompatActivity() {
 
 
         val navController = findNavController(R.id.nav_host_fragment_content_main)
-
+        navController.enableOnBackPressed(true)
         NavigationUI.setupActionBarWithNavController(this, navController)
-        navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, bundle: Bundle? ->
-            binding.toolbar.setNavigationOnClickListener {
-                if (it.id != nc.graph.startDestinationId) {
-                    onBackPressed()
-                }
-            }
-        }
     }
-
 
 
 }

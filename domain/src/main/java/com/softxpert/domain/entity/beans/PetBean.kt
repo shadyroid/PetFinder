@@ -52,13 +52,13 @@ data class PetBean(
 
 @Parcelize
 data class Image(
-    var small: String,
-    var medium: String,
+    var small: String? = null,
+    var medium: String? = null,
 ) : Parcelable
 
 @Parcelize
 data class Colors(
-    var primary: String,
+    var primary: String? = null,
 ) : Parcelable
 
 @Parcelize
@@ -68,7 +68,7 @@ data class Contact(
 
 @Parcelize
 data class Address(
-    var city: String,
-    var state: String,
-    var country: String,
+    var city: String? = null,
+    var state: String? = null,
+    var country: String? = null,
 ) : Parcelable

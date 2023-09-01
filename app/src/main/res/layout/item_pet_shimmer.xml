@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+
+<com.facebook.shimmer.ShimmerFrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="vertical">
-
+    android:orientation="vertical"
+    app:shimmer_auto_start="true"
+    app:shimmer_duration="1000">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -13,7 +16,7 @@
         android:layout_marginHorizontal="8dp"
         android:layout_marginBottom="8dp"
         app:cardElevation="0dp"
-        app:strokeColor="@color/grey"
+        app:strokeColor="@color/shimmer_placeholder"
         app:strokeWidth="1dp">
 
         <LinearLayout
@@ -27,7 +30,8 @@
                 android:layout_height="128dp"
                 android:layout_margin="16dp"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher" />
+                android:src="@drawable/app_logo"
+                app:tint="@color/shimmer_placeholder" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -44,9 +48,10 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:background="@color/shimmer_placeholder"
                     android:gravity="center"
-                    android:text="@string/app_name" />
+                    android:text="@string/app_name"
+                    android:textColor="@color/shimmer_placeholder" />
 
                 <View
                     android:layout_width="0dp"
@@ -57,9 +62,10 @@
                     android:id="@+id/tv_gender"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:background="@color/shimmer_placeholder"
                     android:gravity="center"
-                    android:text="@string/app_name" />
+                    android:text="@string/app_name"
+                    android:textColor="@color/shimmer_placeholder" />
 
                 <View
                     android:layout_width="0dp"
@@ -70,9 +76,10 @@
                     android:id="@+id/tv_type"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
+                    android:background="@color/shimmer_placeholder"
                     android:gravity="center"
-                    android:text="@string/app_name" />
+                    android:text="@string/app_name"
+                    android:textColor="@color/shimmer_placeholder" />
 
                 <View
                     android:layout_width="0dp"
@@ -82,8 +89,5 @@
         </LinearLayout>
     </com.google.android.material.card.MaterialCardView>
 
-    <include
-        android:id="@+id/shimmer"
-        layout="@layout/item_pet_shimmer"
-        android:visibility="gone" />
-</LinearLayout>
+
+</com.facebook.shimmer.ShimmerFrameLayout>
