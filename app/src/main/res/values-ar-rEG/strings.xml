@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">بيوت</string>
+    <string name="invoices">الفواتير</string>
+    <string name="invoice_details">تفاصيل الفاتورة</string>
+
+    <string name="name_is">الاسم: %1$s</string>
+    <string name="gender_is">الجنس: %1$s</string>
+    <string name="type_is">النوع: %1$s</string>
+    <string name="size_is">الحجم: %1$s</string>
+    <string name="color_is">اللون: %1$s</string>
+    <string name="address_is">العنوان: %1$s</string>
+
+    <string name="invoice_website">موقع الفاتورة</string>
+
+    <string name="password">كلمة المرور</string>
+    <string name="sign_in">تسجيل الدخول</string>
+    <string name="email_or_phone_number">البريد الإلكتروني أو رقم الهاتف</string>
+
+    <string name="please_enter_your_email_or_phone_number">رجاءا أدخل البريد الإلكتروني أو رقم الهاتف</string>
+    <string name="please_enter_your_password">من فضلك أدخل رقمك السري</string>
+    <string name="password_should_be_more_than_6_characters">كلمة المرور يجب انت تكون اكبر 6 حروف</string>
+
+    <string name="please_check_your_internet_connection">الرجاء التحقق من اتصال الانترنت الخاص بك</string>
+    <string name="try_again">حاول مجددا</string>
+
+    <string name="login">تسجيل الدخول</string>
+    <string name="search">بحث</string>
+    <string name="user_name">اسم المستخدم</string>
+    <string name="user_code">رمز المستخدم</string>
+    <string name="contract_number">رقم العقد</string>
+    <string name="building_number">رقم المبنى</string>
+    <string name="required">مطلوب</string>
+    <string name="building_name">اسم المبنى</string>
+    <string name="invoices_search">البحث عن فاتورة</string>
+    <string name="users">مستخدمين</string>
+    <string name="receipts">ايصالات</string>
+    <string name="payment_notification">اخطار الدفع</string>
+    <string name="data_update">تحديث البيانات</string>
+</resources>

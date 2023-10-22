@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">Pet Finder</string>
-    <string name="pets">Pets</string>
-    <string name="pet_details">Pet details</string>
+    <string name="app_name">Boyot</string>
+    <string name="invoices">Invoices</string>
+    <string name="invoice_details">Invoice details</string>
 
     <string name="name_is">Name: %1$s</string>
     <string name="gender_is">Gender: %1$s</string>
@@ -10,5 +10,33 @@
     <string name="color_is">Color: %1$s</string>
     <string name="address_is">Address: %1$s</string>
 
-    <string name="pet_website">Pet\'s website</string>
+    <string name="invoice_website">Invoice\'s website</string>
+
+
+    <string name="password">Password</string>
+    <string name="sign_in">Sign in</string>
+    <string name="email_or_phone_number">Email or phone number</string>
+
+    <string name="please_enter_your_email_or_phone_number">Please enter your email or phone number</string>
+    <string name="please_enter_your_password">Please enter your password</string>
+    <string name="password_should_be_more_than_6_characters">Password should be more than6 characters</string>
+
+    <string name="please_check_your_internet_connection">Please check your internet connection</string>
+    <string name="try_again">Try again</string>
+
+    <string name="login">Login</string>
+    <string name="search">Search</string>
+    <string name="user_name">User name</string>
+    <string name="user_code">User code</string>
+    <string name="contract_number">Contract number</string>
+    <string name="building_number">Building number</string>
+    <string name="required">Required</string>
+    <string name="building_name">Building name</string>
+    <string name="invoices_search">Invoices search</string>
+    <string name="users">Users</string>
+    <string name="receipts">Receipts</string>
+    <string name="payment_notification">Payment notification</string>
+    <string name="data_update">Data update</string>
+    <string name="_continue">Continue</string>
+
 </resources>
