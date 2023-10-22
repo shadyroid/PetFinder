@@ -11,6 +11,7 @@ import androidx.navigation.findNavController
 import com.shady.boyot.classes.adapters.InvoicesAdapter
 import com.shady.boyot.classes.utils.EndlessRecyclerViewScrollListener
 import com.shady.boyot.databinding.FragmentInvoicesBinding
+import com.shady.boyot.ui.users.UsersFragmentDirections
 import com.shady.domain.entity.beans.InvoiceBean
 import com.shady.domain.entity.responses.InvoicesResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,6 +47,10 @@ class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
         binding.swipeRefreshLayout.setOnRefreshListener {
             resetState()
             binding.swipeRefreshLayout.isRefreshing = false
+        }
+        binding.btnPayNow.setOnClickListener{
+            binding.root.findNavController()
+                .navigate(InvoicesFragmentDirections.actionNavInvoicesToNavPaymentMethods())
         }
         initInvoicesAdapter()
         initObserves()
@@ -87,6 +92,7 @@ class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
     private fun onInvoicesResponse(response: InvoicesResponse) {
         if (currentPage == 1) {
             binding.shimmer.visibility = View.GONE
+            binding.rvInvoices.visibility = View.VISIBLE
         }
         response.data?.let {
             invoicesAdapter.setFinishedLoading(it.size < 5)
@@ -96,8 +102,7 @@ class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
     }
 
     override fun onInvoiceClick(invoice: InvoiceBean) {
-        binding.root.findNavController()
-            .navigate(InvoicesFragmentDirections.actionNavInvoicesToNavInvoiceDetails(invoice))
+
     }
 
     private fun resetState() {
@@ -105,6 +110,7 @@ class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
         invoicesAdapter.clear()
         endlessRecyclerViewScrollListener.resetState()
         binding.shimmer.visibility = View.VISIBLE
+        binding.rvInvoices.visibility = View.GONE
         currentPage = 1
         requestInvoices()
     }

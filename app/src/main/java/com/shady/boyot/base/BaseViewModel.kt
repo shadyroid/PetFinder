@@ -19,7 +19,7 @@ open class BaseViewModel @Inject constructor() : ViewModel() {
         Log.d("error ", "error : $e")
     }
 
-    public fun clear() {
+   open public fun clear() {
         jobs.forEach { it.cancel() }
         jobs.clear()
     }

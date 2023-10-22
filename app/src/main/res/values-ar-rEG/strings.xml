@@ -36,4 +36,9 @@
     <string name="receipts">ايصالات</string>
     <string name="payment_notification">اخطار الدفع</string>
     <string name="data_update">تحديث البيانات</string>
+    <string name="_continue">استمرار</string>
+    <string name="pay_now">ادفع الآن</string>
+    <string name="visa">دفع بالبطاقة</string>
+    <string name="cash">كاش</string>
+    <string name="payment_methods">طرق الدفع</string>
 </resources>

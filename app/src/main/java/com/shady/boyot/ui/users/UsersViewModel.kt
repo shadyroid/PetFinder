@@ -40,4 +40,9 @@ class UsersViewModel @Inject constructor(
         })
 
     }
+
+    override fun clear() {
+        super.clear()
+
+    }
 }

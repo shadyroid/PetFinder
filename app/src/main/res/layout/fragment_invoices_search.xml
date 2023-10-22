@@ -75,7 +75,6 @@
         android:layout_height="60dp"
         android:layout_marginHorizontal="26dp"
         android:layout_marginTop="26dp"
-        android:layoutDirection="ltr"
         app:cardBackgroundColor="@color/white"
         app:cardCornerRadius="15dp"
         app:cardElevation="4dp">
@@ -93,7 +92,6 @@
             android:hint="@string/user_name"
             android:imeOptions="actionDone"
             android:inputType="textEmailAddress"
-            android:layoutDirection="ltr"
             android:paddingHorizontal="20dp" />
     </androidx.cardview.widget.CardView>
 

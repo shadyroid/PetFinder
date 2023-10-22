@@ -70,6 +70,7 @@ class UsersAdapter @Inject constructor(@ActivityContext val context: Context) :
     ) {
         init {
             itemView.setOnClickListener { onItemClick() }
+            binding.radioButton.setOnClickListener { onItemClick() }
         }
 
         private fun onItemClick() {

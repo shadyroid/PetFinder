@@ -38,5 +38,9 @@
     <string name="payment_notification">Payment notification</string>
     <string name="data_update">Data update</string>
     <string name="_continue">Continue</string>
+    <string name="pay_now">Pay now</string>
+    <string name="visa">Visa</string>
+    <string name="cash">Cash</string>
+    <string name="payment_methods">Payment methods</string>
 
 </resources>

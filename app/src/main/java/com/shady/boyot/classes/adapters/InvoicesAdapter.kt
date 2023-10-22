@@ -70,12 +70,13 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
     ) {
         init {
             itemView.setOnClickListener { onItemClick() }
+            binding.checkBox.setOnClickListener { onItemClick() }
         }
 
         private fun onItemClick() {
+            listener.onInvoiceClick(data[bindingAdapterPosition])
             data[bindingAdapterPosition].isSelected = !data[bindingAdapterPosition].isSelected
             notifyDataSetChanged()
-            listener.onInvoiceClick(data[bindingAdapterPosition])
         }
     }
 }

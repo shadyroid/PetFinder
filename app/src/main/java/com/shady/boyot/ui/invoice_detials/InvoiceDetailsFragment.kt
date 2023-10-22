@@ -33,9 +33,9 @@ class InvoiceDetailsFragment : Fragment() {
     }
 
     private fun init() {
-        val args = InvoiceDetailsFragmentArgs.fromBundle(requireArguments())
-        invoiceBean = args.invoice
-        setData()
+//        val args = InvoiceDetailsFragmentArgs.fromBundle(requireArguments())
+//        invoiceBean = args.invoice
+//        setData()
     }
 
 
