@@ -9,7 +9,6 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.shady.boyot.classes.adapters.UsersAdapter
-import com.shady.boyot.classes.utils.EndlessRecyclerViewScrollListener
 import com.shady.boyot.databinding.FragmentUsersBinding
 import com.shady.domain.entity.beans.UserBean
 import com.shady.domain.entity.responses.UsersResponse
@@ -23,11 +22,16 @@ class UsersFragment : Fragment(), UsersAdapter.Listener {
     private val binding get() = _binding!!
     private val viewModel: UsersViewModel by viewModels()
 
-    private var currentPage = 1
+    private lateinit var userId: String
+    private lateinit var userName: String
+    private var clientCode: String? = null
+    private var clientName: String? = null
+    private var contractNumber: String? = null
+    private var buildingId: String? = null
+    private var unitId: String? = null
 
     @Inject
     lateinit var usersAdapter: UsersAdapter
-    private lateinit var endlessRecyclerViewScrollListener: EndlessRecyclerViewScrollListener
 
 
     override fun onCreateView(
@@ -47,13 +51,27 @@ class UsersFragment : Fragment(), UsersAdapter.Listener {
             resetState()
             binding.swipeRefreshLayout.isRefreshing = false
         }
-        binding.btnContinue.setOnClickListener{
+        binding.toolbar.setNavigationOnClickListener {
+            binding.root.findNavController().popBackStack()
+        }
+        binding.btnContinue.setOnClickListener {
             binding.root.findNavController()
-                .navigate(UsersFragmentDirections.actionNavUsersToNavOptions())
+                .navigate(UsersFragmentDirections.actionNavUsersToNavOptions(userId, userName))
         }
         initUsersAdapter()
+        initArguments()
         initObserves()
         requestUsers()
+
+    }
+
+    private fun initArguments() {
+        val args = UsersFragmentArgs.fromBundle(requireArguments())
+        clientCode = args.clientCode
+        clientName = args.clientName
+        contractNumber = args.contractNumber
+        buildingId = args.buildingId
+        unitId = args.unitId
 
     }
 
@@ -61,14 +79,6 @@ class UsersFragment : Fragment(), UsersAdapter.Listener {
     private fun initUsersAdapter() {
         usersAdapter.listener = this
         binding.rvUsers.adapter = usersAdapter
-        endlessRecyclerViewScrollListener =
-            object : EndlessRecyclerViewScrollListener() {
-                override fun onLoadMore(page: Int) {
-                    currentPage = page
-                    requestUsers()
-                }
-            }
-        binding.rvUsers.addOnScrollListener(endlessRecyclerViewScrollListener)
     }
 
     private fun initObserves() {
@@ -82,35 +92,38 @@ class UsersFragment : Fragment(), UsersAdapter.Listener {
 
 
     fun requestUsers() {
+
         val map = HashMap<String, String>()
-        map["page"] = currentPage.toString()
+        clientCode?.let { map["client_code"] = it }
+        clientName?.let { map["client_name"] = it }
+        contractNumber?.let { map["contract_number"] = it }
+        buildingId?.let { map["building_id"] = it }
+        unitId?.let { map["unit_id"] = it }
         viewModel.requestUsers(map)
     }
 
 
     private fun onUsersResponse(response: UsersResponse) {
-        if (currentPage == 1) {
-            binding.shimmer.visibility = View.GONE
-            binding.rvUsers.visibility = View.VISIBLE
-        }
+        binding.shimmer.visibility = View.GONE
+        binding.rvUsers.visibility = View.VISIBLE
         response.data?.let {
             usersAdapter.setFinishedLoading(it.size < 5)
             usersAdapter.addData(it)
+            onUserClick(it[0])
         }
 
     }
 
     override fun onUserClick(user: UserBean) {
-
+        userId = user.actor_id ?: "0";
+        userName = user.actor_name ?: "";
     }
 
     private fun resetState() {
         viewModel.clear()
         usersAdapter.clear()
-        endlessRecyclerViewScrollListener.resetState()
         binding.shimmer.visibility = View.VISIBLE
         binding.rvUsers.visibility = View.GONE
-        currentPage = 1
         requestUsers()
     }
 }

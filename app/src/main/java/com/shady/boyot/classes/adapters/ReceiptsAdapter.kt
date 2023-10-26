@@ -5,19 +5,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.shady.domain.entity.beans.InvoiceBean
-import com.shady.boyot.databinding.ItemInvoiceBinding
+import com.shady.domain.entity.beans.ReceiptBean
+import com.shady.boyot.databinding.ItemReceiptBinding
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
-class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context) :
-    RecyclerView.Adapter<InvoicesAdapter.ViewHolder>() {
+class ReceiptsAdapter @Inject constructor(@ActivityContext val context: Context) :
+    RecyclerView.Adapter<ReceiptsAdapter.ViewHolder>() {
     lateinit var listener: Listener
-    private val data: MutableList<InvoiceBean> = ArrayList()
+    private val data: MutableList<ReceiptBean> = ArrayList()
     private var isFinishedLoading = false
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewInvoice: Int): ViewHolder = ViewHolder(
-        ItemInvoiceBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewReceipt: Int): ViewHolder = ViewHolder(
+        ItemReceiptBinding.inflate(
             LayoutInflater.from(parent.context),
             parent,
             false
@@ -26,12 +26,11 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvName.text = data[position].client_name
-        holder.binding.tvInvoiceId.text = data[position].invoice_number
+        holder.binding.tvReceiptId.text = data[position].receipt
         holder.binding.tvAddress.text = data[position].address
         holder.binding.tvCost.text = data[position].total_amount
         holder.binding.shimmer.root.visibility =
             if (!isFinishedLoading && position == data.size - 1) View.VISIBLE else View.GONE
-        holder.binding.checkBox.isChecked = data[position].isSelected
     }
 
 
@@ -39,7 +38,7 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
         return data.size
     }
 
-    fun addData(data: List<InvoiceBean>?) {
+    fun addData(data: List<ReceiptBean>?) {
         val lastIndex = if (this.data.isEmpty()) 0 else this.data.size - 1
         this.data.addAll(data!!)
         val newLastIndex = this.data.size
@@ -58,21 +57,18 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
     }
 
     interface Listener {
-        fun onInvoiceClick(invoice: InvoiceBean)
+        fun onReceiptClick(receipt: ReceiptBean)
     }
 
-    inner class ViewHolder(val binding: ItemInvoiceBinding) : RecyclerView.ViewHolder(
+    inner class ViewHolder(val binding: ItemReceiptBinding) : RecyclerView.ViewHolder(
         binding.root
     ) {
         init {
             itemView.setOnClickListener { onItemClick() }
-            binding.checkBox.setOnClickListener { onItemClick() }
         }
 
         private fun onItemClick() {
-            listener.onInvoiceClick(data[bindingAdapterPosition])
-            data[bindingAdapterPosition].isSelected = !data[bindingAdapterPosition].isSelected
-            notifyDataSetChanged()
+            listener.onReceiptClick(data[bindingAdapterPosition])
         }
     }
 }

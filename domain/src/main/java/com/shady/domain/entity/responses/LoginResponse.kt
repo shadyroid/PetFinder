@@ -1,3 +1,6 @@
 package com.shady.domain.entity.responses
 
-class LoginResponse(var token: String?) : BaseResponse()
+data class LoginResponse(var data: Data?) : BaseResponse(){
+    data class Data(var token: String?)
+
+}

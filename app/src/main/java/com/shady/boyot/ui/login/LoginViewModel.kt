@@ -28,7 +28,7 @@ class LoginViewModel @Inject constructor(
             try {
                 val response = authUseCase.requestLogin(body)
                 if (ResponseHandler.isSuccess(response)) {
-                    preferencesHelper.putAuthToken("Bearer ${response.token}")
+                    preferencesHelper.putAuthToken("${response.data?.token}")
                     loginResponseMutableStateFlow.value = response
                 } else {
                     apiErrorMutableStateFlow.value = response

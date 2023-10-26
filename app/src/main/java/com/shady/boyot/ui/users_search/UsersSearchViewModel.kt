@@ -1,4 +1,4 @@
-package com.shady.boyot.ui.invoices_search
+package com.shady.boyot.ui.users_search
 
 import androidx.lifecycle.viewModelScope
 import com.shady.boyot.base.BaseViewModel
@@ -7,14 +7,13 @@ import com.shady.domain.entity.responses.BuildingsResponse
 import com.shady.domain.usecase.InvoicesUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.Job
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
-class InvoicesSearchViewModel @Inject constructor(
+class UsersSearchViewModel @Inject constructor(
     private val invoicesUseCase: InvoicesUseCase,
 ) : BaseViewModel() {
 

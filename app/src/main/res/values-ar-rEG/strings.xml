@@ -41,4 +41,11 @@
     <string name="visa">دفع بالبطاقة</string>
     <string name="cash">كاش</string>
     <string name="payment_methods">طرق الدفع</string>
+    <string name="client_code_is_required">رمز العميل مطلوب</string>
+    <string name="client_name_is_required">اسم العميل مطلوب</string>
+    <string name="contract_number_is_required">رقم العقد مطلوب</string>
+    <string name="building_id_is_required">معرف المبنى مطلوب</string>
+    <string name="unit_id_is_required">معرف الوحدة مطلوب</string>
+
+
 </resources>

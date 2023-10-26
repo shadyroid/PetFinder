@@ -1,4 +1,4 @@
-package com.shady.boyot.ui.invoices
+package com.shady.boyot.ui.receipts
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,25 +9,25 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
 import com.shady.boyot.R
-import com.shady.boyot.classes.adapters.InvoicesAdapter
-import com.shady.boyot.databinding.FragmentInvoicesBinding
-import com.shady.domain.entity.beans.InvoiceBean
-import com.shady.domain.entity.responses.InvoicesResponse
+import com.shady.boyot.classes.adapters.ReceiptsAdapter
+import com.shady.boyot.databinding.FragmentReceiptsBinding
+import com.shady.domain.entity.beans.ReceiptBean
+import com.shady.domain.entity.responses.ReceiptsResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
+class ReceiptsFragment : Fragment(), ReceiptsAdapter.Listener {
     private lateinit var userId: String
     private lateinit var userName: String
-    private var _binding: FragmentInvoicesBinding? = null
+    private var _binding: FragmentReceiptsBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: InvoicesViewModel by viewModels()
+    private val viewModel: ReceiptsViewModel by viewModels()
 
 
     @Inject
-    lateinit var invoicesAdapter: InvoicesAdapter
+    lateinit var receiptsAdapter: ReceiptsAdapter
 
 
     override fun onCreateView(
@@ -36,7 +36,7 @@ class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
         savedInstanceState: Bundle?
     ): View {
         if (_binding == null) {
-            _binding = FragmentInvoicesBinding.inflate(inflater, container, false)
+            _binding = FragmentReceiptsBinding.inflate(inflater, container, false)
             init()
         }
         return binding.root
@@ -47,69 +47,66 @@ class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
             resetState()
             binding.swipeRefreshLayout.isRefreshing = false
         }
-        binding.btnPayNow.setOnClickListener {
-            binding.root.findNavController()
-                .navigate(InvoicesFragmentDirections.actionNavInvoicesToNavPaymentMethods())
-        }
+
         binding.toolbar.setNavigationOnClickListener {
             binding.root.findNavController().popBackStack()
         }
-        initInvoicesAdapter()
+        initReceiptsAdapter()
         initArguments()
         initObserves()
-        requestInvoices()
-        binding.toolbar.title = "$userName ${getString(R.string.invoices)}"
+        requestReceipts()
+        binding.toolbar.title = "$userName ${getString(R.string.receipts)}"
 
     }
 
     private fun initArguments() {
-        val args = InvoicesFragmentArgs.fromBundle(requireArguments())
+        val args = ReceiptsFragmentArgs.fromBundle(requireArguments())
         userId = args.userId
         userName = args.userName
 
     }
 
-    private fun initInvoicesAdapter() {
-        invoicesAdapter.listener = this
-        binding.rvInvoices.adapter = invoicesAdapter
+    private fun initReceiptsAdapter() {
+        receiptsAdapter.listener = this
+        binding.rvReceipts.adapter = receiptsAdapter
     }
 
     private fun initObserves() {
         lifecycleScope.launch {
-            viewModel.invoicesResponseMutableStateFlow.collect {
-                if (it != null) onInvoicesResponse(it)
+            viewModel.receiptsResponseMutableStateFlow.collect {
+                if (it != null) onReceiptsResponse(it)
             }
         }
 
     }
 
 
-    fun requestInvoices() {
+    fun requestReceipts() {
         val map = HashMap<String, String>()
         map["actor_id"] = userId;
-        viewModel.requestInvoices(map)
+        viewModel.requestReceipts(map)
     }
 
 
-    private fun onInvoicesResponse(response: InvoicesResponse) {
+    private fun onReceiptsResponse(response: ReceiptsResponse) {
         binding.shimmer.visibility = View.GONE
-        binding.rvInvoices.visibility = View.VISIBLE
+        binding.rvReceipts.visibility = View.VISIBLE
         response.data?.let {
-            invoicesAdapter.setFinishedLoading(it.size < 5)
-            invoicesAdapter.addData(it)
+            receiptsAdapter.setFinishedLoading(it.size < 5)
+            receiptsAdapter.addData(it)
         }
 
     }
 
-    override fun onInvoiceClick(invoice: InvoiceBean) {
+    override fun onReceiptClick(receipt: ReceiptBean) {
 
     }
 
     private fun resetState() {
         viewModel.clear()
-        invoicesAdapter.clear()
+        receiptsAdapter.clear()
         binding.shimmer.visibility = View.VISIBLE
-        binding.rvInvoices.visibility = View.GONE
-        requestInvoices()
+        binding.rvReceipts.visibility = View.GONE
+        requestReceipts()
     }
 }

@@ -28,7 +28,9 @@ class PaymentMethodsFragment : Fragment() {
     }
 
     private fun init() {
-
+        binding.toolbar.setNavigationOnClickListener {
+            binding.root.findNavController().popBackStack()
+        }
         binding.btnContinue.setOnClickListener {
             binding.root.findNavController()
                 .navigate(PaymentMethodsFragmentDirections.actionNavPaymentMethodsToNavInvoiceDetails())

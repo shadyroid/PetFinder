@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.databinding.FragmentOptionsBinding
+import com.shady.boyot.ui.invoices.InvoicesFragmentArgs
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -13,6 +14,8 @@ import dagger.hilt.android.AndroidEntryPoint
 class OptionsFragment : BaseFragment() {
     private lateinit var binding: FragmentOptionsBinding
 
+    private lateinit var userId: String
+    private lateinit var userName: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -31,10 +34,10 @@ class OptionsFragment : BaseFragment() {
         initObserves()
 
         binding.btnInvoices.setOnClickListener {
-            navigate(OptionsFragmentDirections.actionNavOptionsToNavInvoices())
+            navigate(OptionsFragmentDirections.actionNavOptionsToNavInvoices(userId,userName))
         }
         binding.btnReceipts.setOnClickListener {
-//            navigate(OptionsFragmentDirections.actionNavOptionsToNavReceipts())
+            navigate(OptionsFragmentDirections.actionNavOptionsToNavReceipts(userId,userName))
         }
         binding.btnPaymentNotification.setOnClickListener {
 //            navigate(OptionsFragmentDirections.actionNavOptionsToNavPaymentNotification())
@@ -47,6 +50,9 @@ class OptionsFragment : BaseFragment() {
 
 
     private fun initArguments() {
+        val args = OptionsFragmentArgs.fromBundle(requireArguments())
+        userId = args.userId
+        userName = args.userName
     }
 
     private fun initObserves() {

@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -16,11 +17,12 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
             app:popupTheme="@style/Theme.MyApplication.PopupOverlay"
-            app:title="@string/users"
+            app:title="@string/receipts"
             app:titleCentered="true"
             app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
+
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipeRefreshLayout"
@@ -44,41 +46,25 @@
                 android:orientation="vertical"
                 android:visibility="gone">
 
-                <include layout="@layout/item_user_shimmer" />
+                <include layout="@layout/item_receipt_shimmer" />
 
-                <include layout="@layout/item_user_shimmer" />
+                <include layout="@layout/item_receipt_shimmer" />
 
-                <include layout="@layout/item_user_shimmer" />
+                <include layout="@layout/item_receipt_shimmer" />
 
-                <include layout="@layout/item_user_shimmer" />
+                <include layout="@layout/item_receipt_shimmer" />
 
             </LinearLayout>
 
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/rv_users"
+                android:id="@+id/rv_receipts"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginTop="8dp"
                 android:layout_weight="1"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-                tools:listitem="@layout/item_user" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_continue"
-                android:layout_width="match_parent"
-                android:layout_height="60dp"
-                android:layout_marginHorizontal="16dp"
-                android:layout_marginTop="12dp"
-                android:insetTop="0dp"
-                android:insetBottom="0dp"
-                android:text="@string/_continue"
-                android:textAllCaps="false"
-                android:textColor="@color/white"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                app:backgroundTint="@color/colorPrimary"
-                app:cornerRadius="15dp" />
+                tools:listitem="@layout/item_receipt" />
 
         </LinearLayout>
 

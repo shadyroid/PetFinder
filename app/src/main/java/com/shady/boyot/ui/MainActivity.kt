@@ -23,19 +23,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        setSupportActionBar(binding.toolbar)
-
-
         val navController = findNavController(R.id.nav_host_fragment_content_main)
 
-        NavigationUI.setupActionBarWithNavController(this, navController)
-        navController.addOnDestinationChangedListener { nc: NavController, nd: NavDestination, _: Bundle? ->
-            binding.toolbar.setNavigationOnClickListener {
-                if (nd.id != nc.graph.startDestinationId) {
-                    onBackPressed()
-                }
-            }
-        }
     }
     fun setLanguage() {
         val locale = Locale("ar")

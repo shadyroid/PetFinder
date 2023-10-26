@@ -4,14 +4,12 @@ import android.os.Parcelable
 import kotlinx.parcelize.Parcelize
 
 @Parcelize
-data class InvoiceBean(
+data class ReceiptBean(
     val client_name: String?,
-    val invoice_number: String?,
+    val receipt: String?,
     val invoice_id: String?,
     val address: String?,
     val total_amount: String?,
 
     ):Parcelable{
-    @Transient
-    var isSelected: Boolean = false
 }

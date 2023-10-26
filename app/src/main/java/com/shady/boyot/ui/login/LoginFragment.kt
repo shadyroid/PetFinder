@@ -1,7 +1,8 @@
 package com.shady.boyot.ui.login
 
 import android.os.Bundle
-import android.util.Log
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,17 +43,20 @@ class LoginFragment : BaseFragment() {
 
         binding.btnLogin.setOnClickListener { onLoginClick() }
 
-        if (viewModel.isLoggedIn){
-            navigate(LoginFragmentDirections.actionReplaceNavLoginWithNavInvoicesSearch())
-        }
     }
 
+    override fun onResume() {
+        super.onResume()
+        if (viewModel.isLoggedIn) {
+            navigate(LoginFragmentDirections.actionReplaceNavLoginWithNavUsersSearch())
+        }
+    }
 
     private fun initArguments() {
     }
 
     private fun initObserves() {
-        lifecycleScope.launch { viewModel.apiErrorMutableStateFlow.collect { onApiError(it) }}
+        lifecycleScope.launch { viewModel.apiErrorMutableStateFlow.collect { onApiError(it) } }
         lifecycleScope.launch { viewModel.loadingMutableStateFlow.collect { onLoading(it) } }
         lifecycleScope.launch {
             viewModel.loginResponseMutableStateFlow.collect { if (it != null) onLoginResponse() }
@@ -68,11 +72,18 @@ class LoginFragment : BaseFragment() {
     }
 
     private fun onLoginResponse() {
-        navigate(LoginFragmentDirections.actionReplaceNavLoginWithNavInvoicesSearch())
+        navigate(LoginFragmentDirections.actionReplaceNavLoginWithNavUsersSearch())
     }
 
     private fun isValid(): Boolean =
-        validator.isNotEmpty(binding.etUserName, R.string.please_enter_your_email_or_phone_number) &&
-            validator.isNotEmpty(binding.etPassword, R.string.please_enter_your_password) &&
-            validator.isMoreThan(binding.etPassword, 6, R.string.password_should_be_more_than_6_characters)
+        validator.isNotEmpty(
+            binding.etUserName,
+            R.string.please_enter_your_email_or_phone_number
+        ) &&
+                validator.isNotEmpty(binding.etPassword, R.string.please_enter_your_password) &&
+                validator.isMoreThan(
+                    binding.etPassword,
+                    5,
+                    R.string.password_should_be_more_than_6_characters
+                )
 }

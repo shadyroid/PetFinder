@@ -9,8 +9,8 @@
         android:name="com.shady.boyot.ui.login.LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_replace_nav_login_with_nav_invoices_search"
-            app:destination="@id/nav_invoices_search"
+            android:id="@+id/action_replace_nav_login_with_nav_users_search"
+            app:destination="@id/nav_users_search"
             app:popUpTo="@id/nav_login"
             app:popUpToInclusive="true" />
 
@@ -24,14 +24,25 @@
             android:id="@+id/action_nav_users_to_nav_options"
             app:destination="@id/nav_options" />
         <argument
-            android:name="searchType"
-            app:argType="string" />
+            android:name="clientCode"
+            app:argType="string"
+            app:nullable="true" />
         <argument
-            android:name="searchText"
-            app:argType="string" />
+            android:name="clientName"
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="contractNumber"
+            app:argType="string"
+            app:nullable="true" />
         <argument
             android:name="buildingId"
-            app:argType="string" />
+            app:argType="string"
+            app:nullable="true" />
+        <argument
+            android:name="unitId"
+            app:argType="string"
+            app:nullable="true" />
     </fragment>
     <fragment
         android:id="@+id/nav_options"
@@ -40,6 +51,15 @@
         <action
             android:id="@+id/action_nav_options_to_nav_invoices"
             app:destination="@id/nav_invoices" />
+   <action
+            android:id="@+id/action_nav_options_to_nav_receipts"
+            app:destination="@id/nav_receipts" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/nav_invoices"
@@ -49,14 +69,20 @@
         <action
             android:id="@+id/action_nav_invoices_to_nav_payment_methods"
             app:destination="@id/nav_payment_methods" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
     </fragment>
     <fragment
-        android:id="@+id/nav_invoices_search"
-        android:name="com.shady.boyot.ui.invoices_search.InvoicesSearchFragment"
+        android:id="@+id/nav_users_search"
+        android:name="com.shady.boyot.ui.users_search.UsersSearchFragment"
         android:label="@string/invoices_search"
-        tools:layout="@layout/fragment_invoices_search">
+        tools:layout="@layout/fragment_users_search">
         <action
-            android:id="@+id/action_nav_invoices_search_to_nav_users"
+            android:id="@+id/action_nav_users_search_to_nav_users"
             app:destination="@id/nav_users" />
     </fragment>
     <fragment
@@ -72,10 +98,24 @@
         android:id="@+id/nav_invoice_details"
         android:name="com.shady.boyot.ui.invoice_detials.InvoiceDetailsFragment"
         android:label="@string/invoice_details"
-        tools:layout="@layout/fragment_invoice_details"/>
+        tools:layout="@layout/fragment_invoice_details" />
     <fragment
         android:id="@+id/nav_no_internet_connection"
         android:name="com.shady.boyot.ui.no_internet_connection.NoInternetConnectionFragment"
         tools:layout="@layout/fragment_no_internet_connection" />
-
+    <fragment
+        android:id="@+id/nav_receipts"
+        android:name="com.shady.boyot.ui.receipts.ReceiptsFragment"
+        android:label="@string/receipts"
+        tools:layout="@layout/fragment_receipts">
+        <action
+            android:id="@+id/action_nav_receipts_to_nav_payment_methods"
+            app:destination="@id/nav_payment_methods" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <argument
+            android:name="userName"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -26,8 +26,8 @@ class UsersAdapter @Inject constructor(@ActivityContext val context: Context) :
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvName.text = data[position].name
-        holder.binding.tvId.text = data[position].id
+        holder.binding.tvName.text = data[position].actor_name
+        holder.binding.tvId.text = data[position].actor_id
         holder.binding.tvContractNumber.text = data[position].contract_number
         holder.binding.tvPhone.text = data[position].phone
         holder.binding.tvAddress.text = data[position].address

@@ -8,5 +8,5 @@ import retrofit2.Response
 
 
 class AuthRepoImpl(private val apiService: ApiService) : AuthRepo {
-    override suspend fun requestLogin(body: HashMap<String, String>): LoginResponse = LoginResponse("sdsadsadsadsadsadsad")
+    override suspend fun requestLogin(body: HashMap<String, String>): LoginResponse = apiService.requestLogin(body)
 }

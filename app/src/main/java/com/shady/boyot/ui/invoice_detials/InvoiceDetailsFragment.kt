@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.navigation.findNavController
 import com.bumptech.glide.Glide
 import com.shady.domain.entity.beans.InvoiceBean
 import com.shady.boyot.R
@@ -33,6 +34,9 @@ class InvoiceDetailsFragment : Fragment() {
     }
 
     private fun init() {
+        binding.toolbar.setNavigationOnClickListener {
+            binding.root.findNavController().popBackStack()
+        }
 //        val args = InvoiceDetailsFragmentArgs.fromBundle(requireArguments())
 //        invoiceBean = args.invoice
 //        setData()

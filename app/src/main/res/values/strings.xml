@@ -42,5 +42,10 @@
     <string name="visa">Visa</string>
     <string name="cash">Cash</string>
     <string name="payment_methods">Payment methods</string>
+    <string name="client_code_is_required">Client code is required</string>
+    <string name="client_name_is_required">Client name is required</string>
+    <string name="contract_number_is_required">Contract number is required</string>
+    <string name="building_id_is_required">Building id is required</string>
+    <string name="unit_id_is_required">Unit id is required</string>
 
 </resources>

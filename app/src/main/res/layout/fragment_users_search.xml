@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="#F5F7FC"
+    android:orientation="vertical">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/Theme.MyApplication.AppBarOverlay">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:popupTheme="@style/Theme.MyApplication.PopupOverlay"
+            app:title="@string/invoices_search"
+            app:titleCentered="true"
+            app:titleTextColor="@color/white" />
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:gravity="center"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RadioGroup
+            android:id="@+id/rg_options"
+            android:layout_marginHorizontal="26dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RadioButton
+                android:id="@+id/rb_user_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:checked="true"
+                android:drawableStart="@drawable/ic_user_name"
+                android:drawablePadding="8dp"
+                android:text="@string/user_name" />
+
+            <RadioButton
+                android:id="@+id/rb_user_code"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_user_id"
+                android:drawablePadding="8dp"
+                android:text="@string/user_code" />
+
+            <RadioButton
+                android:id="@+id/rb_contract_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_contract_number"
+                android:drawablePadding="8dp"
+                android:text="@string/contract_number" />
+
+            <RadioButton
+                android:id="@+id/rb_building_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableStart="@drawable/ic_building_number"
+                android:drawablePadding="8dp"
+                android:text="@string/building_number" />
+        </RadioGroup>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_buildings"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="26dp"
+            android:gravity="start|center_vertical"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/building_name"
+            android:textAllCaps="false"
+            android:textColor="@color/gray"
+            android:visibility="gone"
+            app:backgroundTint="@color/white"
+            app:cornerRadius="15dp"
+            app:elevation="4dp"
+            app:icon="@drawable/ic_down_arrow"
+            app:iconGravity="end"
+            app:iconTint="#8E8E8E"
+            tools:visibility="visible" />
+
+        <androidx.cardview.widget.CardView
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="26dp"
+            android:layout_marginTop="26dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="15dp"
+            app:cardElevation="4dp">
+
+            <EditText
+                android:id="@+id/et_search"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="center|start"
+                android:background="@color/transparent"
+                android:cursorVisible="true"
+                android:elevation="2dp"
+                android:focusable="true"
+                android:gravity="start|center"
+                android:hint="@string/user_name"
+                android:imeOptions="actionDone"
+                android:inputType="textEmailAddress"
+                android:paddingHorizontal="20dp" />
+        </androidx.cardview.widget.CardView>
+
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_search"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/search"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:backgroundTint="@color/colorPrimary"
+            app:cornerRadius="15dp" />
+
+    </LinearLayout>
+
+</LinearLayout>
