@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.shady.boyot.R
 import com.shady.domain.entity.beans.ReceiptBean
 import com.shady.boyot.databinding.ItemReceiptBinding
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -27,8 +28,7 @@ class ReceiptsAdapter @Inject constructor(@ActivityContext val context: Context)
         holder.binding.tvName.text = data[position].client_name
         holder.binding.tvReceiptId.text = data[position].receipt
         holder.binding.tvAddress.text = data[position].address
-        holder.binding.tvCost.text = data[position].total_amount
-    }
+        holder.binding.tvCost.text = context.getString(R.string._egp, data[position].total_amount)   }
 
 
     override fun getItemCount(): Int {

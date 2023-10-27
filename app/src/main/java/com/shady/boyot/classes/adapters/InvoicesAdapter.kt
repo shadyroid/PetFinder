@@ -1,10 +1,11 @@
 package com.shady.boyot.classes.adapters
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.shady.boyot.R
 import com.shady.boyot.databinding.ItemInvoiceBinding
 import com.shady.domain.entity.beans.InvoiceBean
 import dagger.hilt.android.qualifiers.ActivityContext
@@ -25,9 +26,11 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binding.tvName.text = data[position].client_name
-        holder.binding.tvInvoiceId.text = data[position].invoice_number
+        holder.binding.tvInvoiceId.text = Html.fromHtml(
+            context.getString(R.string.operation_number_, data[position].invoice_number)
+        )
         holder.binding.tvAddress.text = data[position].address
-        holder.binding.tvCost.text = data[position].total_amount
+        holder.binding.tvCost.text = context.getString(R.string._egp, data[position].total_amount)
         holder.binding.checkBox.isChecked = data[position].isSelected
     }
 
@@ -48,7 +51,6 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
         data.clear()
         notifyItemRangeRemoved(0, count)
     }
-
 
 
     fun getSelectedInvoices(): List<InvoiceBean> {

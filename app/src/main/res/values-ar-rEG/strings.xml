@@ -74,8 +74,22 @@
     <string name="cost">المبلغ</string>
     <string name="_egp">%1$s ج.م</string>
     <string name="receipt">إيصال دفع</string>
+    <string name="operation_number">رقم العملية</string>
+    <string name="operation_number_"><![CDATA[رقم العملية: <b><font color=#1456B2>%1$s</font></b>]]></string>
+    <string name="your_transaction_was_completed_successfully_in"><![CDATA[معاملتك رقم <b><font color=#1456B2>%1$s</font></b> تمت بنجاح في %2$s]]></string>
+    <string name="service_type">نوع الخدمة</string>
+    <string name="client_name">اسم العميل</string>
+    <string name="invoice_number">رقم الفاتورة</string>
+    <string name="contract_name">اسم العقد</string>
+    <string name="unit_number">رقم الوحدة</string>
+    <string name="region">المنطقة</string>
+    <string name="remain">الباقي</string>
+    <string name="total">الإجمالي</string>
 
-
+    <string name="contract_type">نوع العقد</string>
+    <string name="invoice_date">تاريخ الفاتورة</string>
+    <string name="print">طباعة</string>
+    <string name="return_to_another_operation">رجوع لعملية أخرى</string>
 
 
 </resources>

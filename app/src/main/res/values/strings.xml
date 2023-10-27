@@ -74,6 +74,21 @@
     <string name="cost">Cost</string>
     <string name="_egp">%1$s EGP</string>
     <string name="receipt">Receipt</string>
-
+    <string name="operation_number">Operation number</string>
+    <string name="operation_number_"><![CDATA[Operation number: <b><font color=#1456B2>%1$s</font></b>]]></string>
+    <string name="your_transaction_was_completed_successfully_in"><![CDATA[Your transaction <b><font color=#1456B2>%1$s</font></b> was completed successfully in %2$s]]></string>
+    <string name="service_type">Service type</string>
+    <string name="client_name">Client name</string>
+    <string name="invoice_number">Invoice number</string>
+    <string name="contract_name">Contract name</string>
+    <string name="unit_number">Unit number</string>
+    <string name="region">Region</string>
+    <string name="remain">Remain</string>
+    <string name="total">Total</string>
+    <string name="contract_type">Contract type</string>
+    <string name="invoice_date">Invoice date</string>
+    <string name="print">Print</string>
+    <string name="return_to_another_operation">Return to another operation</string>
+    <string name="powered_by">POWERED BY</string>
 
 </resources>
