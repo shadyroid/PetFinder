@@ -73,7 +73,7 @@ class Validator @Inject constructor(@ActivityContext val context: Context,val ap
     }
 
     fun isNotNull(value: String?, required: Int): Boolean {
-        if (value == null || value == "") {
+        if (value.isNullOrEmpty()) {
             appToast.showMessage(context.getString(required))
             return false
         }

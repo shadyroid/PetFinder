@@ -14,7 +14,6 @@ class UsersAdapter @Inject constructor(@ActivityContext val context: Context) :
     RecyclerView.Adapter<UsersAdapter.ViewHolder>() {
     lateinit var listener: Listener
     private val data: MutableList<UserBean> = ArrayList()
-    private var isFinishedLoading = false
     private var selectedIndex = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewUser: Int): ViewHolder = ViewHolder(
@@ -29,11 +28,8 @@ class UsersAdapter @Inject constructor(@ActivityContext val context: Context) :
         holder.binding.tvName.text = data[position].actor_name
         holder.binding.tvId.text = data[position].actor_id
         holder.binding.tvContractNumber.text = data[position].contract_number
-        holder.binding.tvPhone.text = data[position].phone
-        holder.binding.tvAddress.text = data[position].address
-        holder.binding.tvCost.text = data[position].cost
-        holder.binding.shimmer.root.visibility =
-            if (!isFinishedLoading && position == data.size - 1) View.VISIBLE else View.GONE
+        holder.binding.tvPhone.text = data[position].actor_phone
+        holder.binding.tvAddress.text = data[position].building_name
 
         holder.binding.radioButton.isChecked = position == selectedIndex
     }
@@ -56,10 +52,6 @@ class UsersAdapter @Inject constructor(@ActivityContext val context: Context) :
         notifyItemRangeRemoved(0, count)
     }
 
-    fun setFinishedLoading(finishedLoading: Boolean) {
-        isFinishedLoading = finishedLoading
-        if (data.isNotEmpty()) notifyItemChanged(data.size - 1)
-    }
 
     interface Listener {
         fun onUserClick(user: UserBean)

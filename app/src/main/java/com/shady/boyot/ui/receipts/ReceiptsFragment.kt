@@ -4,11 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import com.shady.boyot.R
+import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.ReceiptsAdapter
 import com.shady.boyot.databinding.FragmentReceiptsBinding
 import com.shady.domain.entity.beans.ReceiptBean
@@ -18,7 +17,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class ReceiptsFragment : Fragment(), ReceiptsAdapter.Listener {
+class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
     private lateinit var userId: String
     private lateinit var userName: String
     private var _binding: FragmentReceiptsBinding? = null
@@ -49,11 +48,13 @@ class ReceiptsFragment : Fragment(), ReceiptsAdapter.Listener {
         }
 
         binding.toolbar.setNavigationOnClickListener {
-            binding.root.findNavController().popBackStack()
+            popBackStack()
         }
         initReceiptsAdapter()
         initArguments()
         initObserves()
+        binding.shimmer.visibility = View.VISIBLE
+        binding.rvReceipts.visibility = View.GONE
         requestReceipts()
         binding.toolbar.title = "$userName ${getString(R.string.receipts)}"
 
@@ -92,7 +93,9 @@ class ReceiptsFragment : Fragment(), ReceiptsAdapter.Listener {
         binding.shimmer.visibility = View.GONE
         binding.rvReceipts.visibility = View.VISIBLE
         response.data?.let {
-            receiptsAdapter.setFinishedLoading(it.size < 5)
+            if (it.size == 0)
+                response.details?.let { appToast.showMessage(it) }
+
             receiptsAdapter.addData(it)
         }
 

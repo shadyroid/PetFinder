@@ -14,7 +14,6 @@ class ReceiptsAdapter @Inject constructor(@ActivityContext val context: Context)
     RecyclerView.Adapter<ReceiptsAdapter.ViewHolder>() {
     lateinit var listener: Listener
     private val data: MutableList<ReceiptBean> = ArrayList()
-    private var isFinishedLoading = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewReceipt: Int): ViewHolder = ViewHolder(
         ItemReceiptBinding.inflate(
@@ -29,8 +28,6 @@ class ReceiptsAdapter @Inject constructor(@ActivityContext val context: Context)
         holder.binding.tvReceiptId.text = data[position].receipt
         holder.binding.tvAddress.text = data[position].address
         holder.binding.tvCost.text = data[position].total_amount
-        holder.binding.shimmer.root.visibility =
-            if (!isFinishedLoading && position == data.size - 1) View.VISIBLE else View.GONE
     }
 
 
@@ -51,10 +48,6 @@ class ReceiptsAdapter @Inject constructor(@ActivityContext val context: Context)
         notifyItemRangeRemoved(0, count)
     }
 
-    fun setFinishedLoading(finishedLoading: Boolean) {
-        isFinishedLoading = finishedLoading
-        if (data.isNotEmpty()) notifyItemChanged(data.size - 1)
-    }
 
     interface Listener {
         fun onReceiptClick(receipt: ReceiptBean)

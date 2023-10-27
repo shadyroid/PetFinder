@@ -93,7 +93,7 @@ open class BaseFragment : Fragment() {
             return haveConnectedWifi || haveConnectedMobile
         }
 
-    private fun hideKeyboard() {
+    protected fun hideKeyboard() {
         val view = requireActivity().currentFocus
         if (view != null) {
             val imm =

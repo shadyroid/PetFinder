@@ -72,7 +72,7 @@ class UsersSearchFragment : BaseFragment() {
             }
         })
         binding.toolbar.setNavigationOnClickListener {
-            binding.root.findNavController().popBackStack()
+            popBackStack()
         }
         binding.btnSearch.setOnClickListener { onSearchClick() }
         binding.btnBuildings.setOnClickListener { buildingsDialog.show() }
@@ -159,11 +159,24 @@ class UsersSearchFragment : BaseFragment() {
     }
 
 
-    private fun isValid(): Boolean =
-        validator.isNotNull(clientCode, R.string.client_code_is_required)||
-        validator.isNotNull(clientName, R.string.client_name_is_required)||
-        validator.isNotNull(contractNumber, R.string.contract_number_is_required)||
-        validator.isNotNull(buildingId, R.string.building_id_is_required)||
-        validator.isNotNull(unitId, R.string.unit_id_is_required)
+    private fun isValid(): Boolean {
+        if (clientCode.isNullOrEmpty()&& clientName.isNullOrEmpty() && contractNumber.isNullOrEmpty() && buildingId.isNullOrEmpty() && unitId.isNullOrEmpty()) {
+            appToast.showMessage(
+                requireContext().getString(
+                    when (searchType) {
+                        "user_name" -> R.string.client_code_is_required
+                        "user_code" -> R.string.client_name_is_required
+                        "contract_number" -> R.string.contract_number_is_required
+                        "building_number" -> R.string.building_id_is_required
+                        else -> R.string.required
+                    }
+
+                )
+            )
+            return false
+        }
+        return true
+
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.shady.domain.usecase
 
+import com.shady.domain.entity.responses.BaseResponse
 import com.shady.domain.entity.responses.BuildingsResponse
 import com.shady.domain.entity.responses.InvoicesResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
@@ -13,11 +14,10 @@ class InvoicesUseCase(private val invoicesRepo: InvoicesRepo) {
     suspend fun requestReceipts(params: HashMap<String, String>): ReceiptsResponse =
         invoicesRepo.requestReceipts(params)
 
-    suspend fun requestUsers(params: HashMap<String, String>): UsersResponse =
-        invoicesRepo.requestUsers(params)
-
     suspend fun requestBuildings(): BuildingsResponse =
         invoicesRepo.requestBuildings()
+    suspend fun requestCheckout(body: HashMap<String, String>): BaseResponse =
+        invoicesRepo.requestCheckout(body)
 
 
 }

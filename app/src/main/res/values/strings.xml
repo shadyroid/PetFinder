@@ -3,6 +3,7 @@
     <string name="invoices">Invoices</string>
     <string name="invoice_details">Invoice details</string>
 
+    <string name="invoices_">%1$s Invoices</string>
     <string name="name_is">Name: %1$s</string>
     <string name="gender_is">Gender: %1$s</string>
     <string name="type_is">Type: %1$s</string>
@@ -47,5 +48,31 @@
     <string name="contract_number_is_required">Contract number is required</string>
     <string name="building_id_is_required">Building id is required</string>
     <string name="unit_id_is_required">Unit id is required</string>
+    <string name="name">Name</string>
+    <string name="client_phone">Client phone</string>
+    <string name="email">Email</string>
+    <string name="national_id">National id</string>
+    <string name="national_id_image">National id image</string>
+    <string name="take_a_picture">Take a picture</string>
+    <string name="save_changes">Save changes</string>
+    <string name="back">Back</string>
+    <string name="permission_required">Permission Required</string>
+    <string name="to_use_this_app_you_must_grant_camera_permission_please_go_to_app_settings_and_enable_the_camera_permission">To use this app, you must grant camera permission. Please go to App Settings and enable the camera permission.</string>
+    <string name="open_settings">Open Settings</string>
+    <string name="request_permission">Request permission</string>
+    <string name="cancel">Cancel</string>
+    <string name="insert_client_phone">Insert client phone</string>
+    <string name="insert_email">Insert email</string>
+    <string name="insert_national_id">Insert national id</string>
+    <string name="payment_process_summary">Payment process summary</string>
+    <string name="invoice_payment">Invoice payment</string>
+    <string name="what_will_be_paid">What will be paid</string>
+    <string name="payment_method">Payment method</string>
+    <string name="total_cost">Total cost</string>
+    <string name="service_expenses">Service expenses</string>
+    <string name="tax">Tax</string>
+    <string name="cost">Cost</string>
+    <string name="_egp">%1$s EGP</string>
+
 
 </resources>

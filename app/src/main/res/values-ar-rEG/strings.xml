@@ -2,6 +2,7 @@
     <string name="app_name">بيوت</string>
     <string name="invoices">الفواتير</string>
     <string name="invoice_details">تفاصيل الفاتورة</string>
+    <string name="invoices_">فواتير %1$s</string>
 
     <string name="name_is">الاسم: %1$s</string>
     <string name="gender_is">الجنس: %1$s</string>
@@ -46,6 +47,34 @@
     <string name="contract_number_is_required">رقم العقد مطلوب</string>
     <string name="building_id_is_required">معرف المبنى مطلوب</string>
     <string name="unit_id_is_required">معرف الوحدة مطلوب</string>
+    <string name="name">الاسم</string>
+    <string name="client_phone">رقم العميل</string>
+    <string name="email">الإيميل</string>
+    <string name="national_id">الرقم القومي</string>
+    <string name="national_id_image">صورة الرقم القومي</string>
+    <string name="take_a_picture">التقط صورة</string>
+    <string name="save_changes">حفظ التغييرات</string>
+    <string name="back">رجوع</string>
+    <string name="permission_required">الإذن مطلوب</string>
+    <string name="to_use_this_app_you_must_grant_camera_permission_please_go_to_app_settings_and_enable_the_camera_permission">لاستخدام هذا التطبيق، يجب عليك منح إذن الكاميرا. يرجى الانتقال إلى إعدادات التطبيق وتمكين إذن الكاميرا.</string>
+    <string name="open_settings">افتح الإعدادات</string>
+    <string name="request_permission">اطلب الإذن</string>
+    <string name="cancel">إلغاء</string>
+    <string name="insert_client_phone">اكتب رقم العمبل</string>
+    <string name="insert_email">اكتب الايميل</string>
+    <string name="insert_national_id">اكتب الرقم القومي</string>
+
+    <string name="payment_process_summary">ملخص عملية الدفع</string>
+    <string name="invoice_payment">دفع الفاتورة</string>
+    <string name="what_will_be_paid">سيتم دفع كل من</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="total_cost">إجمالي الدفع</string>
+    <string name="service_expenses">مصاريف الخدمة</string>
+    <string name="tax">الضريبة</string>
+    <string name="cost">المبلغ</string>
+    <string name="_egp">%1$s ج.م</string>
+
+
 
 
 </resources>

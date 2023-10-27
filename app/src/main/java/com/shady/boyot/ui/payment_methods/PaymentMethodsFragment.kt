@@ -6,14 +6,16 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.databinding.FragmentPaymentMethodsBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class PaymentMethodsFragment : Fragment() {
+class PaymentMethodsFragment : BaseFragment() {
     private var _binding: FragmentPaymentMethodsBinding? = null
     private val binding get() = _binding!!
 
+    private lateinit var invoices: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -29,11 +31,14 @@ class PaymentMethodsFragment : Fragment() {
 
     private fun init() {
         binding.toolbar.setNavigationOnClickListener {
-            binding.root.findNavController().popBackStack()
+            popBackStack()
         }
         binding.btnContinue.setOnClickListener {
-            binding.root.findNavController()
-                .navigate(PaymentMethodsFragmentDirections.actionNavPaymentMethodsToNavInvoiceDetails())
+            navigate(
+                    PaymentMethodsFragmentDirections.actionNavPaymentMethodsToNavCheckout(
+                        invoices,if (binding.rbCash.isChecked) 1 else 2
+                    )
+                )
         }
         binding.rbVisa.setOnClickListener {
             binding.rbVisa.isChecked = true
@@ -52,6 +57,13 @@ class PaymentMethodsFragment : Fragment() {
             binding.rbCash.isChecked = true
         }
         initObserves()
+        initArguments()
+
+    }
+
+    private fun initArguments() {
+        val args = PaymentMethodsFragmentArgs.fromBundle(requireArguments())
+        invoices = args.invoices
 
     }
 

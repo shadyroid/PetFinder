@@ -18,7 +18,7 @@
             android:background="@color/colorPrimary"
             app:popupTheme="@style/Theme.MyApplication.PopupOverlay"
             app:title="@string/receipts"
-            app:titleCentered="true"
+             app:navigationIcon="@drawable/ic_back_arrow"
             app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>

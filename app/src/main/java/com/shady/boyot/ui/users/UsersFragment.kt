@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.UsersAdapter
 import com.shady.boyot.databinding.FragmentUsersBinding
 import com.shady.domain.entity.beans.UserBean
@@ -17,7 +18,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class UsersFragment : Fragment(), UsersAdapter.Listener {
+class UsersFragment : BaseFragment(), UsersAdapter.Listener {
     private var _binding: FragmentUsersBinding? = null
     private val binding get() = _binding!!
     private val viewModel: UsersViewModel by viewModels()
@@ -52,15 +53,16 @@ class UsersFragment : Fragment(), UsersAdapter.Listener {
             binding.swipeRefreshLayout.isRefreshing = false
         }
         binding.toolbar.setNavigationOnClickListener {
-            binding.root.findNavController().popBackStack()
+            popBackStack()
         }
         binding.btnContinue.setOnClickListener {
-            binding.root.findNavController()
-                .navigate(UsersFragmentDirections.actionNavUsersToNavOptions(userId, userName))
+            navigate(UsersFragmentDirections.actionNavUsersToNavOptions(userId, userName))
         }
         initUsersAdapter()
         initArguments()
         initObserves()
+        binding.shimmer.visibility = View.VISIBLE
+        binding.rvUsers.visibility = View.GONE
         requestUsers()
 
     }
@@ -107,7 +109,6 @@ class UsersFragment : Fragment(), UsersAdapter.Listener {
         binding.shimmer.visibility = View.GONE
         binding.rvUsers.visibility = View.VISIBLE
         response.data?.let {
-            usersAdapter.setFinishedLoading(it.size < 5)
             usersAdapter.addData(it)
             onUserClick(it[0])
         }

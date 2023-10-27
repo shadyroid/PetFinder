@@ -16,7 +16,7 @@
             android:background="@color/colorPrimary"
             app:popupTheme="@style/Theme.MyApplication.PopupOverlay"
             app:title="@string/payment_methods"
-            app:titleCentered="true"
+             app:navigationIcon="@drawable/ic_back_arrow"
             app:titleTextColor="@color/white" />
 
     </com.google.android.material.appbar.AppBarLayout>
@@ -50,8 +50,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/visa"
+                android:gravity="center"
                 android:textColor="#1456B2"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                app:drawableStartCompat="@drawable/visa_master_card" />
 
         </LinearLayout>
 

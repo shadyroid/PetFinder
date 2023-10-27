@@ -43,7 +43,7 @@ class OptionsFragment : BaseFragment() {
 //            navigate(OptionsFragmentDirections.actionNavOptionsToNavPaymentNotification())
         }
         binding.btnDataUpdate.setOnClickListener {
-//            navigate(OptionsFragmentDirections.actionNavOptionsToNavEditUser())
+            navigate(OptionsFragmentDirections.actionNavOptionsToNavEditUser(userId))
         }
 
     }

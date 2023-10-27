@@ -17,7 +17,7 @@ class AppToast @Inject constructor(@ActivityContext val context: Context) {
     private val toast: Toast = Toast(context)
 
     init {
-        toast.setGravity(Gravity.TOP, 0, 16)
+        toast.setGravity(Gravity.BOTTOM, 0, 16)
         toast.duration = Toast.LENGTH_LONG
         toast.view = binding.root
     }

@@ -60,6 +60,9 @@
         <argument
             android:name="userName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_nav_options_to_nav_edit_user"
+            app:destination="@id/nav_edit_user" />
     </fragment>
     <fragment
         android:id="@+id/nav_invoices"
@@ -90,16 +93,16 @@
         android:name="com.shady.boyot.ui.payment_methods.PaymentMethodsFragment"
         android:label="@string/payment_methods"
         tools:layout="@layout/fragment_payment_methods">
+
         <action
-            android:id="@+id/action_nav_payment_methods_to_nav_invoice_details"
-            app:destination="@id/nav_invoice_details" />
+            android:id="@+id/action_nav_payment_methods_to_nav_checkout"
+            app:destination="@id/nav_checkout" />
+        <argument
+            android:name="invoices"
+            app:argType="string" />
+
     </fragment>
-    <fragment
-        android:id="@+id/nav_invoice_details"
-        android:name="com.shady.boyot.ui.invoice_detials.InvoiceDetailsFragment"
-        android:label="@string/invoice_details"
-        tools:layout="@layout/fragment_invoice_details" />
-    <fragment
+       <fragment
         android:id="@+id/nav_no_internet_connection"
         android:name="com.shady.boyot.ui.no_internet_connection.NoInternetConnectionFragment"
         tools:layout="@layout/fragment_no_internet_connection" />
@@ -117,5 +120,39 @@
         <argument
             android:name="userName"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/nav_edit_user"
+        android:name="com.shady.boyot.ui.edit_user.EditUserFragment"
+        tools:layout="@layout/fragment_edit_user">
+        <argument
+            android:name="userId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_nav_edit_user_to_nav_camera"
+            app:destination="@id/nav_camera" />
+
+    </fragment>
+    <fragment
+        android:id="@+id/nav_camera"
+        android:name="com.shady.boyot.ui.camera.CameraFragment"
+        tools:layout="@layout/fragment_camera"/>
+
+
+    <fragment
+        android:id="@+id/nav_checkout"
+        android:name="com.shady.boyot.ui.checkout.CheckoutFragment"
+        tools:layout="@layout/fragment_checkout">
+        <argument
+            android:name="invoices"
+            app:argType="string" />
+    <argument
+            android:name="paymentMethodId"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_nav_checkout_back_to_nav_options"
+            app:popUpTo="@id/nav_options" />
+
+
     </fragment>
 </navigation>

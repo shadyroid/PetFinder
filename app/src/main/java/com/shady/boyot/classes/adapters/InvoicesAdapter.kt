@@ -5,8 +5,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.shady.domain.entity.beans.InvoiceBean
 import com.shady.boyot.databinding.ItemInvoiceBinding
+import com.shady.domain.entity.beans.InvoiceBean
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
@@ -14,7 +14,6 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
     RecyclerView.Adapter<InvoicesAdapter.ViewHolder>() {
     lateinit var listener: Listener
     private val data: MutableList<InvoiceBean> = ArrayList()
-    private var isFinishedLoading = false
 
     override fun onCreateViewHolder(parent: ViewGroup, viewInvoice: Int): ViewHolder = ViewHolder(
         ItemInvoiceBinding.inflate(
@@ -29,8 +28,6 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
         holder.binding.tvInvoiceId.text = data[position].invoice_number
         holder.binding.tvAddress.text = data[position].address
         holder.binding.tvCost.text = data[position].total_amount
-        holder.binding.shimmer.root.visibility =
-            if (!isFinishedLoading && position == data.size - 1) View.VISIBLE else View.GONE
         holder.binding.checkBox.isChecked = data[position].isSelected
     }
 
@@ -52,9 +49,16 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
         notifyItemRangeRemoved(0, count)
     }
 
-    fun setFinishedLoading(finishedLoading: Boolean) {
-        isFinishedLoading = finishedLoading
-        if (data.isNotEmpty()) notifyItemChanged(data.size - 1)
+
+
+    fun getSelectedInvoices(): List<InvoiceBean> {
+        val selectedInvoices: MutableList<InvoiceBean> = mutableListOf()
+        for (invoice in data) {
+            if (invoice.isSelected) {
+                selectedInvoices.add(invoice)
+            }
+        }
+        return selectedInvoices
     }
 
     interface Listener {

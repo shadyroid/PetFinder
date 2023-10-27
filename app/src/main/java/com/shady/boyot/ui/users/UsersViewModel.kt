@@ -5,6 +5,7 @@ import com.shady.boyot.base.BaseViewModel
 import com.shady.boyot.classes.utils.ResponseHandler
 import com.shady.domain.entity.responses.UsersResponse
 import com.shady.domain.usecase.InvoicesUseCase
+import com.shady.domain.usecase.UsersUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class UsersViewModel @Inject constructor(
-    private val invoicesUseCase: InvoicesUseCase,
+    private val usersUseCase: UsersUseCase,
 ) : BaseViewModel() {
 
     private val _usersResponseMutableStateFlow = MutableStateFlow<UsersResponse?>(null)
@@ -26,7 +27,7 @@ class UsersViewModel @Inject constructor(
         loadingMutableStateFlow.value = true
         jobs.add(viewModelScope.launch(Dispatchers.IO) {
             try {
-                val response = invoicesUseCase.requestUsers(body)
+                val response = usersUseCase.requestUsers(body)
                 if (ResponseHandler.isSuccess(response)) {
                     _usersResponseMutableStateFlow.value = response
                 } else {

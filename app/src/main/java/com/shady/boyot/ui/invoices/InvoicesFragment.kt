@@ -8,7 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import com.google.gson.Gson
 import com.shady.boyot.R
+import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.InvoicesAdapter
 import com.shady.boyot.databinding.FragmentInvoicesBinding
 import com.shady.domain.entity.beans.InvoiceBean
@@ -18,7 +20,7 @@ import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
+class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
     private lateinit var userId: String
     private lateinit var userName: String
     private var _binding: FragmentInvoicesBinding? = null
@@ -48,17 +50,19 @@ class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
             binding.swipeRefreshLayout.isRefreshing = false
         }
         binding.btnPayNow.setOnClickListener {
-            binding.root.findNavController()
-                .navigate(InvoicesFragmentDirections.actionNavInvoicesToNavPaymentMethods())
+            navigate(InvoicesFragmentDirections.actionNavInvoicesToNavPaymentMethods( Gson().toJson(invoicesAdapter.getSelectedInvoices())))
         }
         binding.toolbar.setNavigationOnClickListener {
-            binding.root.findNavController().popBackStack()
+            popBackStack()
         }
         initInvoicesAdapter()
         initArguments()
         initObserves()
+        binding.shimmer.visibility = View.VISIBLE
+        binding.rvInvoices.visibility = View.GONE
         requestInvoices()
-        binding.toolbar.title = "$userName ${getString(R.string.invoices)}"
+        binding.toolbar.title = "${getString(R.string.invoices)} $userName"
+        binding.toolbar.title = getString(R.string.invoices_,  userName)
 
     }
 
@@ -95,7 +99,6 @@ class InvoicesFragment : Fragment(), InvoicesAdapter.Listener {
         binding.shimmer.visibility = View.GONE
         binding.rvInvoices.visibility = View.VISIBLE
         response.data?.let {
-            invoicesAdapter.setFinishedLoading(it.size < 5)
             invoicesAdapter.addData(it)
         }
 
