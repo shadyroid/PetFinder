@@ -1,7 +1,9 @@
 package com.shady.data.remote
 
+import com.shady.domain.entity.requests.CheckoutRequest
 import com.shady.domain.entity.responses.BaseResponse
 import com.shady.domain.entity.responses.BuildingsResponse
+import com.shady.domain.entity.responses.CheckoutResponse
 import com.shady.domain.entity.responses.InvoicesResponse
 import com.shady.domain.entity.responses.LoginResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
@@ -9,6 +11,7 @@ import com.shady.domain.entity.responses.UserDetailsResponse
 import com.shady.domain.entity.responses.UsersResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
+import retrofit2.http.Body
 import retrofit2.http.FieldMap
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
@@ -48,9 +51,9 @@ interface ApiService {
 
     @GET("/pos/building")
     suspend fun requestBuildings(): BuildingsResponse
-    @FormUrlEncoded
-    @GET("/pos/invoices/offlinePaid")
-    suspend fun requestCheckout(@FieldMap body: HashMap<String, String>): BaseResponse
+
+    @POST("/pos/invoices/offlinePaid")
+    suspend fun requestCheckout(@Body request: CheckoutRequest): CheckoutResponse
 
 
 }

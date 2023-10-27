@@ -33,7 +33,7 @@ open class BaseFragment : Fragment() {
 //            } else if (ResponseHandler.isForceUpdate(response)) {
 //                view?.findNavController()?.navigate(R.id.nav_force_update)
 //            } else {
-            appToast.showMessage(response.details!!)
+            appToast.showMessage(response.message!!)
 //            }
     }
 

@@ -1,6 +1,6 @@
 package com.shady.domain.entity.beans
 
-class BuildingBean(
+data class BuildingBean(
     var id: String,
     var name: String,
 )

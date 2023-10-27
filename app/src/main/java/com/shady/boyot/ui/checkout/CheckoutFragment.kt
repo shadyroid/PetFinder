@@ -17,7 +17,8 @@ import com.shady.boyot.classes.adapters.CheckoutsAdapter
 import com.shady.boyot.databinding.FragmentCheckoutBinding
 import com.shady.boyot.ui.MainActivity
 import com.shady.domain.entity.beans.InvoiceBean
-import com.shady.domain.entity.responses.BaseResponse
+import com.shady.domain.entity.requests.CheckoutRequest
+import com.shady.domain.entity.responses.CheckoutResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -82,7 +83,7 @@ class CheckoutFragment : BaseFragment() {
 
 
         binding.tvPaymentMethod.text = getString(
-            if (paymentMethodId == 1) R.string.visa else R.string.cash
+            if (paymentMethodId == 1) R.string.cash else R.string.visa
         )
         binding.tvCost.text = getString(R.string._egp, String.format("%.2f", cost))
         binding.tvServiceExpenses.text =
@@ -106,17 +107,23 @@ class CheckoutFragment : BaseFragment() {
 
 
     fun requestCheckout() {
-        val map = HashMap<String, String>()
+        val invoiceIds: MutableList<String> = mutableListOf()
         for (invoice in invoices) {
-            map["invoice_ids[]"] = invoice.invoice_id.toString();
+            invoice.invoice_id?.let { invoiceIds.add(it) }
         }
-        viewModel.requestCheckout(map)
+        viewModel.requestCheckout(CheckoutRequest(invoiceIds))
     }
 
 
-    private fun onCheckoutResponse(response: BaseResponse) {
-        response.details?.let { appToast.showMessage(it) }
-        navigate(CheckoutFragmentDirections.actionNavCheckoutBackToNavOptions())
+    private fun onCheckoutResponse(response: CheckoutResponse) {
+        response.message?.let { appToast.showMessage(it) }
+        response.data?.let {
+            navigate(
+                CheckoutFragmentDirections.actionNavCheckoutToNavReceiptDetails(
+                    it
+                )
+            )
+        }
     }
 
     private fun onCheckoutClick() {

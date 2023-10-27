@@ -51,7 +51,7 @@
         <action
             android:id="@+id/action_nav_options_to_nav_invoices"
             app:destination="@id/nav_invoices" />
-   <action
+        <action
             android:id="@+id/action_nav_options_to_nav_receipts"
             app:destination="@id/nav_receipts" />
         <argument
@@ -102,7 +102,7 @@
             app:argType="string" />
 
     </fragment>
-       <fragment
+    <fragment
         android:id="@+id/nav_no_internet_connection"
         android:name="com.shady.boyot.ui.no_internet_connection.NoInternetConnectionFragment"
         tools:layout="@layout/fragment_no_internet_connection" />
@@ -114,13 +114,16 @@
         <action
             android:id="@+id/action_nav_receipts_to_nav_payment_methods"
             app:destination="@id/nav_payment_methods" />
+        <action
+            android:id="@+id/action_nav_receipts_to_nav_receipt_details"
+            app:destination="@id/nav_receipt_details" />
         <argument
             android:name="userId"
             app:argType="string" />
         <argument
             android:name="userName"
             app:argType="string" />
-    </fragment>
+         </fragment>
     <fragment
         android:id="@+id/nav_edit_user"
         android:name="com.shady.boyot.ui.edit_user.EditUserFragment"
@@ -136,7 +139,7 @@
     <fragment
         android:id="@+id/nav_camera"
         android:name="com.shady.boyot.ui.camera.CameraFragment"
-        tools:layout="@layout/fragment_camera"/>
+        tools:layout="@layout/fragment_camera" />
 
 
     <fragment
@@ -146,13 +149,22 @@
         <argument
             android:name="invoices"
             app:argType="string" />
-    <argument
+        <argument
             android:name="paymentMethodId"
             app:argType="integer" />
         <action
-            android:id="@+id/action_nav_checkout_back_to_nav_options"
+            android:id="@+id/action_nav_checkout_to_nav_receipt_details"
+            app:destination="@id/nav_receipt_details"
             app:popUpTo="@id/nav_options" />
 
+    </fragment>
+    <fragment
+        android:id="@+id/nav_receipt_details"
+        android:name="com.shady.boyot.ui.receipt_details.ReceiptDetailsFragment"
+        tools:layout="@layout/fragment_receipt_details">
+        <argument
+            android:name="receipt"
+            app:argType="com.shady.domain.entity.beans.ReceiptBean" />
 
     </fragment>
 </navigation>

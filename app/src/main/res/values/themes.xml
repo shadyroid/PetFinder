@@ -11,6 +11,7 @@
         <item name="android:fontFamily">@font/cairo</item>
         <item name="font">@font/cairo</item>
         <item name="fontFamily">@font/cairo</item>
+        <item name="android:statusBarColor">@color/colorPrimary</item>
     </style>
 
 

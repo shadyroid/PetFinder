@@ -73,6 +73,7 @@
     <string name="tax">Tax</string>
     <string name="cost">Cost</string>
     <string name="_egp">%1$s EGP</string>
+    <string name="receipt">Receipt</string>
 
 
 </resources>

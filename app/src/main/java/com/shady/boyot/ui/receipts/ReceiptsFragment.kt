@@ -10,6 +10,7 @@ import com.shady.boyot.R
 import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.ReceiptsAdapter
 import com.shady.boyot.databinding.FragmentReceiptsBinding
+import com.shady.boyot.ui.checkout.CheckoutFragmentDirections
 import com.shady.domain.entity.beans.ReceiptBean
 import com.shady.domain.entity.responses.ReceiptsResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -94,7 +95,7 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
         binding.rvReceipts.visibility = View.VISIBLE
         response.data?.let {
             if (it.size == 0)
-                response.details?.let { appToast.showMessage(it) }
+                response.message?.let { appToast.showMessage(it) }
 
             receiptsAdapter.addData(it)
         }
@@ -102,6 +103,7 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
     }
 
     override fun onReceiptClick(receipt: ReceiptBean) {
+        navigate(ReceiptsFragmentDirections.actionNavReceiptsToNavReceiptDetails(receipt))
 
     }
 

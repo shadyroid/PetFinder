@@ -30,7 +30,7 @@ class NetworkInterceptor : Interceptor {
     private fun handleException(e: Exception, request: Request, statusCode: Int): Response {
         val baseResponse = BaseResponse()
         baseResponse.status_code = statusCode
-        baseResponse.details = e.toString()
+        baseResponse.message = e.toString()
         return Response.Builder()
             .body(
                 gson.toJson(
