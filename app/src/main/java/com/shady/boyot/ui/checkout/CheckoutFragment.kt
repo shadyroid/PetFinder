@@ -97,6 +97,8 @@ class CheckoutFragment : BaseFragment() {
     }
 
     private fun initObserves() {
+        lifecycleScope.launch { viewModel.apiErrorMutableStateFlow.collect { onApiError(it) } }
+        lifecycleScope.launch { viewModel.loadingMutableStateFlow.collect { onLoading(it) } }
         lifecycleScope.launch {
             viewModel.checkoutResponseMutableStateFlow.collect {
                 if (it != null) onCheckoutResponse(it)

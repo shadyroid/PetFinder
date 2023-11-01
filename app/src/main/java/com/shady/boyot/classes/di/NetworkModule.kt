@@ -4,6 +4,7 @@ import com.shady.data.preferenceses.PreferencesHelper
 import com.shady.data.remote.ApiService
 import com.shady.data.remote.interceptors.HeadersInterceptor
 import com.shady.boyot.classes.others.CONSTANTS.BACKEND.BASE_URL
+import com.shady.data.remote.interceptors.NetworkInterceptor
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -32,12 +33,18 @@ object NetworkModule {
     fun provideHeadersInterceptor(preferencesHelper: PreferencesHelper): HeadersInterceptor {
         return HeadersInterceptor(preferencesHelper)
     }
+    @Provides
+    @Singleton
+    fun provideNetworkInterceptor(): NetworkInterceptor {
+        return NetworkInterceptor()
+    }
 
     @Provides
     @Singleton
     fun provideOkHttp(
         httpLoggingInterceptor: HttpLoggingInterceptor,
-        headersInterceptor: HeadersInterceptor
+        headersInterceptor: HeadersInterceptor,
+        networkInterceptor: NetworkInterceptor
     ): OkHttpClient {
         return OkHttpClient.Builder()
             .connectTimeout(2, TimeUnit.MINUTES)
@@ -45,6 +52,7 @@ object NetworkModule {
             .writeTimeout(2, TimeUnit.MINUTES)
             .addInterceptor(headersInterceptor)
             .addInterceptor(httpLoggingInterceptor)
+            .addInterceptor(networkInterceptor)
             .build()
 
     }

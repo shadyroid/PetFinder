@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
 
     private val userName: String = ""
     private val password: String = ""
-    val BTC: Long = 0L
+    val BTC: Long = 999
 
     private val callBack: FawryConnect.OnConnectionCallBack = FawryConnect.OnConnectionCallBack(
         onConnected = { },

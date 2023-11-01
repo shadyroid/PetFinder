@@ -90,5 +90,6 @@
     <string name="print">Print</string>
     <string name="return_to_another_operation">Return to another operation</string>
     <string name="powered_by">POWERED BY</string>
+    <string name="unit_name">unit_name</string>
 
 </resources>

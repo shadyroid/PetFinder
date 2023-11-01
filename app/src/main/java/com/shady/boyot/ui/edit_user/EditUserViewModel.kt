@@ -22,7 +22,6 @@ class EditUserViewModel @Inject constructor(
     private val preferencesHelper: PreferencesHelper
 ) : BaseViewModel() {
 
-    val isLoggedIn: Boolean = preferencesHelper.isLoggedIn
     val editUserResponseMutableStateFlow = MutableStateFlow<BaseResponse?>(null)
     val userDetailsResponseMutableStateFlow = MutableStateFlow<UserDetailsResponse?>(null)
 

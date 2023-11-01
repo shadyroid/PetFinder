@@ -11,15 +11,8 @@ class HeadersInterceptor(private val preferencesHelper: PreferencesHelper) : Int
     override fun intercept(chain: Interceptor.Chain): Response {
         val request: Request = chain.request()
         val requestBuilder: Request.Builder = request.newBuilder()
-        requestBuilder.addHeader(
-            "Content-Type",
-            "application/json; charset=UTF-8"
-        )
-        requestBuilder.addHeader(
-            "Accept",
-            "application/json; charset=UTF-8"
-        )
-        preferencesHelper.authToken?.let {
+
+        preferencesHelper.getAuthToken()?.let {
             requestBuilder.addHeader(
                 "Authorization",
                 "Bearer $it"

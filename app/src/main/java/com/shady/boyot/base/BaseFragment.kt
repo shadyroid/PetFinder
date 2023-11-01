@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import com.shady.boyot.R
 import com.shady.boyot.classes.dialogs.LoadingDialog
 import com.shady.boyot.classes.utils.AppToast
+import com.shady.boyot.classes.utils.ResponseHandler
 import com.shady.boyot.ui.MainViewModel
 import com.shady.domain.entity.responses.BaseResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -27,14 +28,15 @@ open class BaseFragment : Fragment() {
     lateinit var loadingDialog: LoadingDialog
 
     fun onApiError(response: BaseResponse?) {
-        if (response != null)
-//            if (ResponseHandler.isLogoutCode(response)) {
-//                logout()
+        if (response != null) {
+            if (ResponseHandler.isLogoutCode(response)) {
+                logout()
 //            } else if (ResponseHandler.isForceUpdate(response)) {
 //                view?.findNavController()?.navigate(R.id.nav_force_update)
-//            } else {
+            } else {
             appToast.showMessage(response.message!!)
-//            }
+            }
+        }
     }
 
     fun onLoading(isLoading: Boolean) {
@@ -47,7 +49,6 @@ open class BaseFragment : Fragment() {
 
     private fun logout() {
         mainViewModel.clearUserData()
-        NotificationManagerCompat.from(requireContext()).cancelAll()
         restartActivity(requireActivity())
     }
 

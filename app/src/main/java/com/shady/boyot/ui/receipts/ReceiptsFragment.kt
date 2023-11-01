@@ -74,6 +74,9 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
     }
 
     private fun initObserves() {
+        lifecycleScope.launch { viewModel.apiErrorMutableStateFlow.collect { onApiError(it) } }
+        lifecycleScope.launch { viewModel.loadingMutableStateFlow.collect { onLoading(it) } }
+
         lifecycleScope.launch {
             viewModel.receiptsResponseMutableStateFlow.collect {
                 if (it != null) onReceiptsResponse(it)

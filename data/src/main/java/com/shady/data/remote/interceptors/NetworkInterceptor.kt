@@ -19,7 +19,18 @@ class NetworkInterceptor : Interceptor {
             val body = response.body
             var bodyString = body?.string()
             val contentType = body?.contentType()
-            response.newBuilder().body(bodyString?.toResponseBody(contentType)).build()
+
+            if (response.code == 200 || response.code == 201 || response.code == 202) {
+                response.newBuilder().body(bodyString?.toResponseBody(contentType)).build()
+            } else {
+                bodyString = bodyString?.replaceFirst(
+                    "\\{".toRegex(),
+                    "{\"status_code\": \"${response.code}\"${if (bodyString.isEmpty()) "}" else ","}"
+                )
+                response.newBuilder()
+                    .body(bodyString?.toResponseBody(contentType)).code(200)
+                    .build()
+            }
         } catch (e: IOException) {
             handleException(e, request, 0)
         } catch (e: Exception) {

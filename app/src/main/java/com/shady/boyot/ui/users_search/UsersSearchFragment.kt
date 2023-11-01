@@ -103,7 +103,7 @@ class UsersSearchFragment : BaseFragment() {
                 R.id.rb_building_number -> {
                     binding.etSearch.setText("")
                     binding.btnBuildings.visibility = VISIBLE
-                    binding.etSearch.setHint(R.string.building_number)
+                    binding.etSearch.setHint(R.string.unit_name)
                     searchType = "building_number"
                 }
             }
@@ -123,11 +123,14 @@ class UsersSearchFragment : BaseFragment() {
     }
 
     private fun initObserves() {
+        lifecycleScope.launch { viewModel.apiErrorMutableStateFlow.collect { onApiError(it) } }
+        lifecycleScope.launch { viewModel.loadingMutableStateFlow.collect { onLoading(it) } }
         lifecycleScope.launch {
             viewModel.buildingsResponseMutableStateFlow.collect {
                 if (it != null) onBuildingsResponse(it)
             }
         }
+
 
     }
 
@@ -164,8 +167,8 @@ class UsersSearchFragment : BaseFragment() {
             appToast.showMessage(
                 requireContext().getString(
                     when (searchType) {
-                        "user_name" -> R.string.client_code_is_required
-                        "user_code" -> R.string.client_name_is_required
+                        "user_name" -> R.string.client_name_is_required
+                        "user_code" -> R.string.client_code_is_required
                         "contract_number" -> R.string.contract_number_is_required
                         "building_number" -> R.string.building_id_is_required
                         else -> R.string.required

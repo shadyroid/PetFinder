@@ -3,6 +3,7 @@ package com.shady.boyot.ui.login
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -47,6 +48,7 @@ class LoginFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
+        Log.d("TAG", "onResume: "+viewModel.isLoggedIn.toString())
         if (viewModel.isLoggedIn) {
             navigate(LoginFragmentDirections.actionReplaceNavLoginWithNavUsersSearch())
         }

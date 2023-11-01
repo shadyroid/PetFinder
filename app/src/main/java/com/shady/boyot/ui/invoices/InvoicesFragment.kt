@@ -79,6 +79,8 @@ class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
     }
 
     private fun initObserves() {
+        lifecycleScope.launch { viewModel.apiErrorMutableStateFlow.collect { onApiError(it) } }
+        lifecycleScope.launch { viewModel.loadingMutableStateFlow.collect { onLoading(it) } }
         lifecycleScope.launch {
             viewModel.invoicesResponseMutableStateFlow.collect {
                 if (it != null) onInvoicesResponse(it)

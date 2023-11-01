@@ -90,6 +90,7 @@
     <string name="invoice_date">تاريخ الفاتورة</string>
     <string name="print">طباعة</string>
     <string name="return_to_another_operation">رجوع لعملية أخرى</string>
+    <string name="unit_name">اسم الوحدة</string>
 
 
 </resources>

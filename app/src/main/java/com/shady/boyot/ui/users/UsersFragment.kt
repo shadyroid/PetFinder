@@ -84,6 +84,9 @@ class UsersFragment : BaseFragment(), UsersAdapter.Listener {
     }
 
     private fun initObserves() {
+        lifecycleScope.launch { viewModel.apiErrorMutableStateFlow.collect { onApiError(it) } }
+        lifecycleScope.launch { viewModel.loadingMutableStateFlow.collect { onLoading(it) } }
+
         lifecycleScope.launch {
             viewModel.usersResponseMutableStateFlow.collect {
                 if (it != null) onUsersResponse(it)
