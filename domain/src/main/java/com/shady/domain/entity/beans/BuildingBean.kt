@@ -1,6 +1,5 @@
 package com.shady.domain.entity.beans
 
-data class BuildingBean(
-    var id: String,
-    var name: String,
-)
+import com.shady.domain.entity.responses.BaseResponse
+
+class BuildingBean : IdNameBean()

@@ -26,14 +26,14 @@
 
     <string name="login">تسجيل الدخول</string>
     <string name="search">بحث</string>
-    <string name="user_name">اسم المستخدم</string>
-    <string name="user_code">رمز المستخدم</string>
+    <string name="user_name">اسم العميل</string>
+    <string name="user_code">رمز العميل</string>
     <string name="contract_number">رقم العقد</string>
     <string name="building_number">رقم المبنى</string>
     <string name="required">مطلوب</string>
     <string name="building_name">اسم المبنى</string>
     <string name="invoices_search">البحث عن فاتورة</string>
-    <string name="users">مستخدمين</string>
+    <string name="users">عملاء</string>
     <string name="receipts">ايصالات</string>
     <string name="payment_notification">اخطار الدفع</string>
     <string name="data_update">تحديث البيانات</string>
@@ -45,7 +45,7 @@
     <string name="client_code_is_required">رمز العميل مطلوب</string>
     <string name="client_name_is_required">اسم العميل مطلوب</string>
     <string name="contract_number_is_required">رقم العقد مطلوب</string>
-    <string name="building_id_is_required">معرف المبنى مطلوب</string>
+    <string name="building_id_and_unit_id_is_required">معرف المبنى ورقم الوحدة مطلوب</string>
     <string name="unit_id_is_required">معرف الوحدة مطلوب</string>
     <string name="name">الاسم</string>
     <string name="client_phone">رقم العميل</string>

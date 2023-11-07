@@ -8,15 +8,16 @@ import android.view.LayoutInflater
 import android.view.Window
 import android.widget.LinearLayout
 import androidx.recyclerview.widget.DefaultItemAnimator
-import com.shady.boyot.classes.adapters.BuildingsAdapter
+import com.shady.boyot.classes.adapters.OptionsAdapter
 import com.shady.boyot.databinding.DialogBuildingsBinding
 import com.shady.domain.entity.beans.BuildingBean
+import com.shady.domain.entity.beans.IdNameBean
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
-class BuildingsDialog @Inject constructor(
+class OptionsDialog @Inject constructor(
     @ActivityContext context: Context,
-    val buildingsAdapter: BuildingsAdapter
+    val optionsAdapter: OptionsAdapter
 ) {
     private val binding: DialogBuildingsBinding
     private val dialog: Dialog
@@ -34,24 +35,24 @@ class BuildingsDialog @Inject constructor(
         )
         binding.rvBuildings.itemAnimator = DefaultItemAnimator()
         binding.rvBuildings.isNestedScrollingEnabled = true
-        binding.rvBuildings.adapter = buildingsAdapter
+        binding.rvBuildings.adapter = optionsAdapter
         binding.ivClose.setOnClickListener { dismiss() }
     }
 
     fun show() {
         dialog.show()
     }
-    fun setListener(listener: BuildingsAdapter.Listener) {
-        buildingsAdapter.listener = listener
+    fun setListener(listener: OptionsAdapter.Listener) {
+        optionsAdapter.listener = listener
     }
 
     fun dismiss() {
         dialog.dismiss()
     }
 
-    fun setData(places: MutableList<BuildingBean>?) {
-        places?.let {
-            buildingsAdapter.setData(it)
+    fun setData(options: MutableList<out IdNameBean>?) {
+        options?.let {
+            optionsAdapter.setData(it)
         }
     }
 

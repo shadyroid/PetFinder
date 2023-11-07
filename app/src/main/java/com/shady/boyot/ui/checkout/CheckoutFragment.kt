@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.fawry.pos.retailer.connect.FawryConnect
@@ -14,6 +15,7 @@ import com.google.gson.reflect.TypeToken
 import com.shady.boyot.R
 import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.CheckoutsAdapter
+import com.shady.boyot.classes.others.CONSTANTS.BTC
 import com.shady.boyot.databinding.FragmentCheckoutBinding
 import com.shady.boyot.ui.MainActivity
 import com.shady.domain.entity.beans.InvoiceBean
@@ -140,13 +142,13 @@ class CheckoutFragment : BaseFragment() {
                 ?.setDisplayInvoice(false)
                 ?.setOrderID(orderId)
                 ?.send(
-                    (activity as MainActivity).BTC,
+                    BTC,
                     FawryConnect.OnTransactionCallBack(
                         onTransactionRequestSuccess = {
                             requestCheckout()
                         },
                         onTransactionRequestFailure = { payment, throwable ->
-                            {}
+                            Toast.makeText(requireContext(), "لم يتم الدف بسبب\n"+ throwable?.message, Toast.LENGTH_SHORT).show()
                         }
                     )
                 )

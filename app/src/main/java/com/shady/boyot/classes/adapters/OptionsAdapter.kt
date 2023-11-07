@@ -5,13 +5,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.shady.boyot.databinding.ItemBuildingBinding
-import com.shady.domain.entity.beans.BuildingBean
+import com.shady.domain.entity.beans.IdNameBean
 import dagger.hilt.android.qualifiers.ActivityContext
 import javax.inject.Inject
 
-class BuildingsAdapter@Inject constructor(@ActivityContext context: Context) :
-    RecyclerView.Adapter<BuildingsAdapter.ViewHolder>() {
-    private var buildings: List<BuildingBean> = ArrayList()
+class OptionsAdapter@Inject constructor(@ActivityContext context: Context) :
+    RecyclerView.Adapter<OptionsAdapter.ViewHolder>() {
+    private var buildings: List<IdNameBean> = ArrayList()
     lateinit var listener: Listener
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder = ViewHolder(
         ItemBuildingBinding.inflate(
@@ -29,13 +29,13 @@ class BuildingsAdapter@Inject constructor(@ActivityContext context: Context) :
         return buildings.size
     }
 
-    fun setData(buildings: List<BuildingBean>) {
+    fun setData(buildings: List<IdNameBean>) {
         this.buildings = buildings
         notifyDataSetChanged()
     }
 
     interface Listener {
-        fun onBuildingClick(building: BuildingBean?)
+        fun onBuildingClick(building: IdNameBean?)
     }
 
     inner class ViewHolder(var binding: ItemBuildingBinding) : RecyclerView.ViewHolder(

@@ -1,12 +1,11 @@
 package com.shady.domain.usecase
 
 import com.shady.domain.entity.requests.CheckoutRequest
-import com.shady.domain.entity.responses.BaseResponse
 import com.shady.domain.entity.responses.BuildingsResponse
 import com.shady.domain.entity.responses.CheckoutResponse
 import com.shady.domain.entity.responses.InvoicesResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
-import com.shady.domain.entity.responses.UsersResponse
+import com.shady.domain.entity.responses.UnitsResponse
 import com.shady.domain.repo.InvoicesRepo
 
 class InvoicesUseCase(private val invoicesRepo: InvoicesRepo) {
@@ -20,6 +19,8 @@ class InvoicesUseCase(private val invoicesRepo: InvoicesRepo) {
         invoicesRepo.requestBuildings()
     suspend fun requestCheckout(request: CheckoutRequest): CheckoutResponse =
         invoicesRepo.requestCheckout(request)
+suspend fun requestUnits(params: HashMap<String, String>): UnitsResponse =
+        invoicesRepo.requestUnits(params)
 
 
 }

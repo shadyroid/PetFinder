@@ -1,7 +1,9 @@
 package com.shady.boyot.ui
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import com.fawry.pos.retailer.connect.FawryConnect
@@ -12,6 +14,8 @@ import com.fawry.pos.retailer.connect.model.payment.PaymentOptionType
 import com.fawry.pos.retailer.ipc.IPCConnectivity
 import com.fawry.pos.retailer.modelBuilder.sale.CardSale
 import com.shady.boyot.R
+import com.shady.boyot.classes.others.CONSTANTS.password
+import com.shady.boyot.classes.others.CONSTANTS.userName
 import com.shady.boyot.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
@@ -19,14 +23,12 @@ import java.util.Locale
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private val userName: String = ""
-    private val password: String = ""
-    val BTC: Long = 999
+
 
     private val callBack: FawryConnect.OnConnectionCallBack = FawryConnect.OnConnectionCallBack(
-        onConnected = { },
+        onConnected = { Log.d("TAG", "shady onConnected: ")},
         onFailure = { connection, throwable ->
-            {}
+            Toast.makeText(this, "خدمة الدفع لم يتم تشغيلها بسبب\n"+ throwable?.message, Toast.LENGTH_SHORT).show()
         },
         onDisconnected = { }
     )

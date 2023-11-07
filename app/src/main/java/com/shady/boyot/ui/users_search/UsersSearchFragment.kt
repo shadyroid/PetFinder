@@ -9,15 +9,16 @@ import android.view.ViewGroup
 import android.widget.RadioGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import com.shady.boyot.R
 import com.shady.boyot.base.BaseFragment
-import com.shady.boyot.classes.adapters.BuildingsAdapter
-import com.shady.boyot.classes.dialogs.BuildingsDialog
+import com.shady.boyot.classes.adapters.OptionsAdapter
+import com.shady.boyot.classes.dialogs.OptionsDialog
 import com.shady.boyot.classes.utils.Validator
 import com.shady.boyot.databinding.FragmentUsersSearchBinding
 import com.shady.domain.entity.beans.BuildingBean
+import com.shady.domain.entity.beans.IdNameBean
 import com.shady.domain.entity.responses.BuildingsResponse
+import com.shady.domain.entity.responses.UnitsResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -43,7 +44,9 @@ class UsersSearchFragment : BaseFragment() {
 
 
     @Inject
-    lateinit var buildingsDialog: BuildingsDialog
+    lateinit var buildingsDialog: OptionsDialog
+    @Inject
+    lateinit var unitsDialog: OptionsDialog
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -61,12 +64,25 @@ class UsersSearchFragment : BaseFragment() {
         initArguments()
         initObserves()
         viewModel.requestBuildings()
-        buildingsDialog.setListener(object : BuildingsAdapter.Listener {
-            override fun onBuildingClick(building: BuildingBean?) {
+        buildingsDialog.setListener(object : OptionsAdapter.Listener {
+            override fun onBuildingClick(idNameBean: IdNameBean?) {
                 buildingsDialog.dismiss()
-                building?.let {
+                idNameBean?.let {
                     selectedBuildingId = it.id
                     binding.btnBuildings.text = it.name
+                    selectedUnitId = null;
+                    binding.btnUnits.text = ""
+                    requestUnits();
+                }
+
+            }
+        })
+  unitsDialog.setListener(object : OptionsAdapter.Listener {
+            override fun onBuildingClick(idNameBean: IdNameBean?) {
+                unitsDialog.dismiss()
+                idNameBean?.let {
+                    selectedUnitId = it.id
+                    binding.btnUnits.text = it.name
                 }
 
             }
@@ -76,9 +92,12 @@ class UsersSearchFragment : BaseFragment() {
         }
         binding.btnSearch.setOnClickListener { onSearchClick() }
         binding.btnBuildings.setOnClickListener { buildingsDialog.show() }
+        binding.btnUnits.setOnClickListener { unitsDialog.show() }
 
         binding.rgOptions.setOnCheckedChangeListener { radioGroup: RadioGroup, id: Int ->
             binding.btnBuildings.visibility = GONE
+            binding.btnUnits.visibility = GONE
+            binding.cvSearch.visibility = VISIBLE
             selectedBuildingId = null;
             selectedUnitId = null;
             when (id) {
@@ -103,7 +122,8 @@ class UsersSearchFragment : BaseFragment() {
                 R.id.rb_building_number -> {
                     binding.etSearch.setText("")
                     binding.btnBuildings.visibility = VISIBLE
-                    binding.etSearch.setHint(R.string.unit_name)
+                    binding.btnUnits.visibility = VISIBLE
+                    binding.cvSearch.visibility = GONE
                     searchType = "building_number"
                 }
             }
@@ -112,13 +132,21 @@ class UsersSearchFragment : BaseFragment() {
 
     }
 
-
+    fun requestUnits() {
+        val map = HashMap<String, String>()
+        map["building_id"] = selectedBuildingId.toString();
+        viewModel.requestUnits(map)
+    }
     private fun initArguments() {
 
     }
 
     private fun onBuildingsResponse(response: BuildingsResponse) {
         response.data?.data.let { buildingsDialog.setData(it) }
+
+    }
+    private fun onUnitsResponse(response: UnitsResponse) {
+        response.data?.data.let { unitsDialog.setData(it) }
 
     }
 
@@ -130,6 +158,13 @@ class UsersSearchFragment : BaseFragment() {
                 if (it != null) onBuildingsResponse(it)
             }
         }
+
+     lifecycleScope.launch {
+            viewModel.unitsResponseMutableStateFlow.collect {
+                if (it != null) onUnitsResponse(it)
+            }
+        }
+
 
 
     }
@@ -145,7 +180,10 @@ class UsersSearchFragment : BaseFragment() {
             "user_name" -> clientName = binding.etSearch.text.toString()
             "user_code" -> clientCode = binding.etSearch.text.toString()
             "contract_number" -> contractNumber = binding.etSearch.text.toString()
-            "building_number" -> buildingId = selectedBuildingId
+            "building_number" -> {
+                buildingId = selectedBuildingId
+                unitId = selectedUnitId
+            }
         }
         if (!isValid())
             return
@@ -170,7 +208,7 @@ class UsersSearchFragment : BaseFragment() {
                         "user_name" -> R.string.client_name_is_required
                         "user_code" -> R.string.client_code_is_required
                         "contract_number" -> R.string.contract_number_is_required
-                        "building_number" -> R.string.building_id_is_required
+                        "building_number" -> R.string.building_id_and_unit_id_is_required
                         else -> R.string.required
                     }
 

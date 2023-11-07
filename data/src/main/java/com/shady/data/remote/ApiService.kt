@@ -7,6 +7,7 @@ import com.shady.domain.entity.responses.CheckoutResponse
 import com.shady.domain.entity.responses.InvoicesResponse
 import com.shady.domain.entity.responses.LoginResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
+import com.shady.domain.entity.responses.UnitsResponse
 import com.shady.domain.entity.responses.UserDetailsResponse
 import com.shady.domain.entity.responses.UsersResponse
 import okhttp3.MultipartBody
@@ -51,6 +52,9 @@ interface ApiService {
 
     @GET("/pos/building")
     suspend fun requestBuildings(): BuildingsResponse
+
+    @GET("/pos/units")
+    suspend fun requestUnits(@QueryMap params: HashMap<String, String>): UnitsResponse
 
     @POST("/pos/invoices/offlinePaid")
     suspend fun requestCheckout(@Body request: CheckoutRequest): CheckoutResponse

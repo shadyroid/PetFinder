@@ -38,6 +38,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
                 android:text="@string/payment_process_summary"
                 android:textColor="#545353"
                 android:textSize="22sp"
@@ -46,6 +47,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginHorizontal="12dp"
                 android:text="@string/what_will_be_paid"
                 android:textColor="@color/black"
                 android:textSize="14sp"
@@ -118,6 +120,7 @@
                     tools:text="10,500.00 ج.م" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -146,6 +149,7 @@
                     tools:text="50 ج.م" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -174,6 +178,7 @@
                     tools:text="0.00 ج.م" />
 
             </LinearLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -202,6 +207,7 @@
                     tools:text="10,500.00 ج.م" />
 
             </LinearLayout>
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/btn_checkout"
                 android:layout_width="match_parent"

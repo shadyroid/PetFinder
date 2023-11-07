@@ -11,6 +11,7 @@ import com.shady.domain.entity.responses.CheckoutResponse
 import com.shady.domain.entity.responses.InvoicesResponse
 import com.shady.domain.entity.responses.LoginResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
+import com.shady.domain.entity.responses.UnitsResponse
 import com.shady.domain.entity.responses.UsersResponse
 import com.shady.domain.repo.InvoicesRepo
 
@@ -18,6 +19,7 @@ class InvoicesRepoImpl(private val apiService: ApiService) : InvoicesRepo {
     override suspend fun requestInvoices(body: HashMap<String, String>): InvoicesResponse = apiService.requestInvoices(body)
     override suspend fun requestReceipts(body: HashMap<String, String>): ReceiptsResponse = apiService.requestReceipts(body)
     override suspend fun requestBuildings(): BuildingsResponse = apiService.requestBuildings()
+    override suspend fun requestUnits(body: HashMap<String, String>): UnitsResponse = apiService.requestUnits(body)
     override suspend fun requestCheckout(request: CheckoutRequest): CheckoutResponse = apiService.requestCheckout(request)
 
 
