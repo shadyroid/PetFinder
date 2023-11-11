@@ -34,6 +34,9 @@ class ReceiptDetailsFragment : BaseFragment() {
         binding.toolbar.setNavigationOnClickListener {
             popBackStack()
         }
+        binding.ivHeaderLogo.setOnClickListener {
+            navigate(R.id.global_action_back_to_users_search);
+        }
         binding.tvReturnToAnotherOperation.setOnClickListener {
             popBackStack()
         }

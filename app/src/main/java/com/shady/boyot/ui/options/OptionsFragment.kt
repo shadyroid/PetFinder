@@ -16,6 +16,7 @@ class OptionsFragment : BaseFragment() {
 
     private lateinit var userId: String
     private lateinit var userName: String
+    private lateinit var userAddress: String
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -46,6 +47,10 @@ class OptionsFragment : BaseFragment() {
             navigate(OptionsFragmentDirections.actionNavOptionsToNavEditUser(userId))
         }
 
+        binding.tvName.setText(userName)
+        binding.tvId.setText(userId)
+        binding.tvAddress.setText(userAddress)
+
     }
 
 
@@ -53,6 +58,7 @@ class OptionsFragment : BaseFragment() {
         val args = OptionsFragmentArgs.fromBundle(requireArguments())
         userId = args.userId
         userName = args.userName
+        userAddress = args.userAddress
     }
 
     private fun initObserves() {

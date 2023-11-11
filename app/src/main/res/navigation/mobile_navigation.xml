@@ -4,6 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/mobile_navigation"
     app:startDestination="@+id/nav_login">
+    <action
+        android:id="@+id/global_action_back_to_users_search"
+        app:popUpTo="@id/nav_users_search" />
+
     <fragment
         android:id="@+id/nav_login"
         android:name="com.shady.boyot.ui.login.LoginFragment"
@@ -59,6 +63,9 @@
             app:argType="string" />
         <argument
             android:name="userName"
+            app:argType="string" />
+        <argument
+            android:name="userAddress"
             app:argType="string" />
         <action
             android:id="@+id/action_nav_options_to_nav_edit_user"

@@ -70,6 +70,15 @@ open class BaseFragment : Fragment() {
         }
         view?.findNavController()?.navigate(directions)
     }
+ open fun navigate(direction: Int) {
+        appToast.cancel()
+        hideKeyboard()
+        if (!isInternetAvailable) {
+            view?.findNavController()?.navigate(R.id.nav_no_internet_connection)
+            return
+        }
+        view?.findNavController()?.navigate(direction)
+    }
 
 
     val isInternetAvailable: Boolean

@@ -21,13 +21,14 @@ import com.shady.boyot.ui.MainActivity
 import com.shady.domain.entity.beans.InvoiceBean
 import com.shady.domain.entity.requests.CheckoutRequest
 import com.shady.domain.entity.responses.CheckoutResponse
+import com.shady.domain.entity.responses.GenerateOrderIdResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class CheckoutFragment : BaseFragment() {
-    private val orderId: String? = "ddfdsfdsfdsfdsfdsfdsfdsfdsf"
+    private var orderId: String? = ""
     private var tax: Double = 0.0
     private var serviceExpenses: Double = 0.0
     private var totalCost: Double = 0.0
@@ -58,6 +59,9 @@ class CheckoutFragment : BaseFragment() {
     private fun init() {
         binding.toolbar.setNavigationOnClickListener {
             popBackStack()
+        }
+        binding.ivHeaderLogo.setOnClickListener {
+            navigate(R.id.global_action_back_to_users_search);
         }
         binding.btnCheckout.setOnClickListener {
             onCheckoutClick()
@@ -102,20 +106,68 @@ class CheckoutFragment : BaseFragment() {
         lifecycleScope.launch { viewModel.apiErrorMutableStateFlow.collect { onApiError(it) } }
         lifecycleScope.launch { viewModel.loadingMutableStateFlow.collect { onLoading(it) } }
         lifecycleScope.launch {
-            viewModel.checkoutResponseMutableStateFlow.collect {
+            viewModel.cashCheckoutResponseMutableStateFlow.collect {
                 if (it != null) onCheckoutResponse(it)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.visaCheckoutResponseMutableStateFlow.collect {
+                if (it != null) onCheckoutResponse(it)
+            }
+        }
+        lifecycleScope.launch {
+            viewModel.generateOrderIdResponseMutableStateFlow.collect {
+                if (it != null) onGenerateOrderIdResponse(it)
             }
         }
 
     }
 
+    private fun onGenerateOrderIdResponse(response: GenerateOrderIdResponse) {
+        orderId = response.data?.order_id
+        (activity as MainActivity).fawryConnect
+            ?.requestSale<CardSale.Builder>(PaymentOptionType.CARD)
+            ?.setAmount(totalCost)
+            ?.setCurrency("EGP")
+            ?.setPrintReceipt(true)
+            ?.setDisplayInvoice(false)
+            ?.setOrderID(response.data?.order_id)
+            ?.send(
+                BTC,
+                FawryConnect.OnTransactionCallBack(
+                    onTransactionRequestSuccess = {
+                        requestVisaCheckout()
+                    },
+                    onTransactionRequestFailure = { payment, throwable ->
+                        Toast.makeText(
+                            requireContext(),
+                            "لم يتم الدف بسبب\n" + throwable?.message,
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
+                )
+            )
+    }
 
-    fun requestCheckout() {
+
+    fun requestCashCheckout() {
         val invoiceIds: MutableList<String> = mutableListOf()
         for (invoice in invoices) {
             invoice.invoice_id?.let { invoiceIds.add(it) }
         }
-        viewModel.requestCheckout(CheckoutRequest(invoiceIds))
+        viewModel.requestCashCheckout(CheckoutRequest(invoiceIds, null))
+    }
+
+    private fun requestVisaCheckout() {
+        viewModel.requestVisaCheckout(CheckoutRequest(null, orderId))
+    }
+
+    private fun requestGenerateOrderId() {
+        val invoiceIds: MutableList<String> = mutableListOf()
+        for (invoice in invoices) {
+            invoice.invoice_id?.let { invoiceIds.add(it) }
+        }
+        viewModel.requestGenerateOrderId(CheckoutRequest(invoiceIds, null))
     }
 
 
@@ -132,27 +184,9 @@ class CheckoutFragment : BaseFragment() {
 
     private fun onCheckoutClick() {
         if (paymentMethodId == 1)
-            requestCheckout()
+            requestCashCheckout()
         else
-            (activity as MainActivity).fawryConnect
-                ?.requestSale<CardSale.Builder>(PaymentOptionType.CARD)
-                ?.setAmount(totalCost)
-                ?.setCurrency("EGP")
-                ?.setPrintReceipt(true)
-                ?.setDisplayInvoice(false)
-                ?.setOrderID(orderId)
-                ?.send(
-                    BTC,
-                    FawryConnect.OnTransactionCallBack(
-                        onTransactionRequestSuccess = {
-                            requestCheckout()
-                        },
-                        onTransactionRequestFailure = { payment, throwable ->
-                            Toast.makeText(requireContext(), "لم يتم الدف بسبب\n"+ throwable?.message, Toast.LENGTH_SHORT).show()
-                        }
-                    )
-                )
-
+            requestGenerateOrderId()
     }
 
 

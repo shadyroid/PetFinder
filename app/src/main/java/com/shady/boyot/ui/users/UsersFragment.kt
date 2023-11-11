@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.findNavController
+import com.shady.boyot.R
 import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.UsersAdapter
 import com.shady.boyot.databinding.FragmentUsersBinding
@@ -25,6 +26,7 @@ class UsersFragment : BaseFragment(), UsersAdapter.Listener {
 
     private lateinit var userId: String
     private lateinit var userName: String
+    private lateinit var userAddress: String
     private var clientCode: String? = null
     private var clientName: String? = null
     private var contractNumber: String? = null
@@ -55,8 +57,11 @@ class UsersFragment : BaseFragment(), UsersAdapter.Listener {
         binding.toolbar.setNavigationOnClickListener {
             popBackStack()
         }
+        binding.ivHeaderLogo.setOnClickListener {
+            navigate(R.id.global_action_back_to_users_search);
+        }
         binding.btnContinue.setOnClickListener {
-            navigate(UsersFragmentDirections.actionNavUsersToNavOptions(userId, userName))
+            navigate(UsersFragmentDirections.actionNavUsersToNavOptions(userId, userName,userAddress))
         }
         initUsersAdapter()
         initArguments()
@@ -121,6 +126,7 @@ class UsersFragment : BaseFragment(), UsersAdapter.Listener {
     override fun onUserClick(user: UserBean) {
         userId = user.actor_id ?: "0";
         userName = user.actor_name ?: "";
+        userAddress = user.building_name ?: "";
     }
 
     private fun resetState() {

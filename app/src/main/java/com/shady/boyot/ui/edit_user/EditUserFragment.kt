@@ -21,6 +21,7 @@ import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.request.target.CustomTarget
 import com.bumptech.glide.request.target.Target
 import com.bumptech.glide.request.transition.Transition
+import com.shady.boyot.R
 import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.utils.AppHelper
 import com.shady.boyot.databinding.FragmentEditUserBinding
@@ -71,6 +72,9 @@ class EditUserFragment : BaseFragment() {
     private fun setOnClickListener() {
         binding.toolbar.setNavigationOnClickListener {
             popBackStack()
+        }
+        binding.ivHeaderLogo.setOnClickListener {
+            navigate(R.id.global_action_back_to_users_search);
         }
         binding.ivEditEmail.setOnClickListener {
             binding.etEmail.isEnabled = true

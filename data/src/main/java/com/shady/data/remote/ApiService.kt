@@ -4,6 +4,7 @@ import com.shady.domain.entity.requests.CheckoutRequest
 import com.shady.domain.entity.responses.BaseResponse
 import com.shady.domain.entity.responses.BuildingsResponse
 import com.shady.domain.entity.responses.CheckoutResponse
+import com.shady.domain.entity.responses.GenerateOrderIdResponse
 import com.shady.domain.entity.responses.InvoicesResponse
 import com.shady.domain.entity.responses.LoginResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
@@ -57,7 +58,13 @@ interface ApiService {
     suspend fun requestUnits(@QueryMap params: HashMap<String, String>): UnitsResponse
 
     @POST("/pos/invoices/offlinePaid")
-    suspend fun requestCheckout(@Body request: CheckoutRequest): CheckoutResponse
+    suspend fun requestCashCheckout(@Body request: CheckoutRequest): CheckoutResponse
+
+    @POST("/pos/confirmOnlinePaid")
+    suspend fun requestVisaCheckout(@Body request: CheckoutRequest): CheckoutResponse
+
+    @POST("/pos/generateOrderIds")
+    suspend fun requestGenerateOrderId(@Body request: CheckoutRequest): GenerateOrderIdResponse
 
 
 }

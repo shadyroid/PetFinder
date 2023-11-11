@@ -11,6 +11,7 @@ import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.ReceiptsAdapter
 import com.shady.boyot.databinding.FragmentReceiptsBinding
 import com.shady.boyot.ui.checkout.CheckoutFragmentDirections
+import com.shady.boyot.ui.options.OptionsFragmentDirections
 import com.shady.domain.entity.beans.ReceiptBean
 import com.shady.domain.entity.responses.ReceiptsResponse
 import dagger.hilt.android.AndroidEntryPoint
@@ -50,6 +51,10 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
 
         binding.toolbar.setNavigationOnClickListener {
             popBackStack()
+        }
+
+      binding.ivHeaderLogo.setOnClickListener {
+          navigate(R.id.global_action_back_to_users_search);
         }
         initReceiptsAdapter()
         initArguments()

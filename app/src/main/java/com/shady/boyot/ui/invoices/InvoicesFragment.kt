@@ -55,6 +55,9 @@ class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
         binding.toolbar.setNavigationOnClickListener {
             popBackStack()
         }
+        binding.ivHeaderLogo.setOnClickListener {
+            navigate(R.id.global_action_back_to_users_search);
+        }
         initInvoicesAdapter()
         initArguments()
         initObserves()

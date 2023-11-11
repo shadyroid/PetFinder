@@ -16,10 +16,20 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_back_arrow"
             app:popupTheme="@style/Theme.MyApplication.PopupOverlay"
+
             app:title="@string/receipts"
-             app:navigationIcon="@drawable/ic_back_arrow"
-            app:titleTextColor="@color/white" />
+            app:titleTextColor="@color/white">
+
+            <ImageView
+                android:id="@+id/iv_header_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:paddingHorizontal="20dp"
+                android:src="@drawable/ic_header_logo" />
+        </com.google.android.material.appbar.MaterialToolbar>
 
     </com.google.android.material.appbar.AppBarLayout>
 

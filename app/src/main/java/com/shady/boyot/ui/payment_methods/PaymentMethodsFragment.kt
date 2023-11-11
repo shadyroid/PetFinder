@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
+import com.shady.boyot.R
 import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.databinding.FragmentPaymentMethodsBinding
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,6 +33,9 @@ class PaymentMethodsFragment : BaseFragment() {
     private fun init() {
         binding.toolbar.setNavigationOnClickListener {
             popBackStack()
+        }
+        binding.ivHeaderLogo.setOnClickListener {
+            navigate(R.id.global_action_back_to_users_search);
         }
         binding.btnContinue.setOnClickListener {
             navigate(
