@@ -124,14 +124,14 @@ class CheckoutFragment : BaseFragment() {
     }
 
     private fun onGenerateOrderIdResponse(response: GenerateOrderIdResponse) {
-        orderId = response.data?.order_id
+        orderId = response.data?.merchant_reference_id
         (activity as MainActivity).fawryConnect
             ?.requestSale<CardSale.Builder>(PaymentOptionType.CARD)
             ?.setAmount(totalCost)
             ?.setCurrency("EGP")
             ?.setPrintReceipt(true)
             ?.setDisplayInvoice(false)
-            ?.setOrderID(response.data?.order_id)
+            ?.setOrderID(response.data?.merchant_reference_id)
             ?.send(
                 BTC,
                 FawryConnect.OnTransactionCallBack(
