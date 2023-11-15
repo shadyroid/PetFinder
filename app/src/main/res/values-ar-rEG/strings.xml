@@ -91,6 +91,9 @@
     <string name="print">طباعة</string>
     <string name="return_to_another_operation">رجوع لعملية أخرى</string>
     <string name="unit_name">اسم الوحدة</string>
-
-
+    <string name="powered_by">POWERED BY</string>
+    <string name="no_results">لا توجد نتائج</string>
+    <string name="options">خيارات</string>
+    <string name="invoice_">فاتورة شهر: %1$s</string>
+    <string name="recipt_">إيصال دفع شهر : %1$s</string>
 </resources>

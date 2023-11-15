@@ -89,7 +89,11 @@
     <string name="invoice_date">Invoice date</string>
     <string name="print">Print</string>
     <string name="return_to_another_operation">Return to another operation</string>
-    <string name="powered_by">POWERED BY</string>
     <string name="unit_name">unit_name</string>
+    <string name="powered_by">POWERED BY</string>
+    <string name="no_results">No Results</string>
+    <string name="options">Options</string>
+    <string name="invoice_">Invoice: %1$s</string>
+    <string name="recipt_">Receipt: %1$s</string>
 
 </resources>

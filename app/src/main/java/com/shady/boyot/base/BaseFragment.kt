@@ -4,7 +4,6 @@ import android.app.Activity
 import android.net.ConnectivityManager
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.NavDirections
@@ -27,19 +26,19 @@ open class BaseFragment : Fragment() {
     @Inject
     lateinit var loadingDialog: LoadingDialog
 
-    fun onApiError(response: BaseResponse?) {
+    open fun onApiError(response: BaseResponse?) {
         if (response != null) {
             if (ResponseHandler.isLogoutCode(response)) {
                 logout()
 //            } else if (ResponseHandler.isForceUpdate(response)) {
 //                view?.findNavController()?.navigate(R.id.nav_force_update)
             } else {
-            appToast.showMessage(response.message!!)
+                appToast.showMessage(response.message!!)
             }
         }
     }
 
-    fun onLoading(isLoading: Boolean) {
+    open fun onLoading(isLoading: Boolean) {
         if (isLoading)
             loadingDialog.show()
         else
@@ -70,7 +69,8 @@ open class BaseFragment : Fragment() {
         }
         view?.findNavController()?.navigate(directions)
     }
- open fun navigate(direction: Int) {
+
+    open fun navigate(direction: Int) {
         appToast.cancel()
         hideKeyboard()
         if (!isInternetAvailable) {

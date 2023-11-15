@@ -10,6 +10,7 @@ data class InvoiceBean(
     val invoice_id: String?,
     val address: String?,
     val total_amount: String?,
+    val collection_date: String?,
 
     ):Parcelable{
     @Transient

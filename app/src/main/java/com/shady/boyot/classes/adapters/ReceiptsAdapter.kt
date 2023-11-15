@@ -25,7 +25,7 @@ class ReceiptsAdapter @Inject constructor(@ActivityContext val context: Context)
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvName.text = data[position].client_name
+        holder.binding.tvName.text = context.getString(R.string.recipt_, data[position].collection_date)
         holder.binding.tvReceiptId.text = data[position].receipt
         holder.binding.tvAddress.text = data[position].address
         holder.binding.tvCost.text = context.getString(R.string._egp, data[position].total_amount)   }

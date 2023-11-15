@@ -48,7 +48,6 @@ class LoginFragment : BaseFragment() {
 
     override fun onResume() {
         super.onResume()
-        Log.d("TAG", "onResume: "+viewModel.isLoggedIn.toString())
         if (viewModel.isLoggedIn) {
             navigate(LoginFragmentDirections.actionReplaceNavLoginWithNavUsersSearch())
         }

@@ -1,130 +1,166 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:background="#F5F7FC"
-    android:gravity="center"
     android:orientation="vertical">
 
-
-    <TextView
-        android:id="@+id/tv_name"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="#1456B2"
-        android:textSize="24sp"
-        tools:text="محمد يسري أبو النور" />
-  <TextView
-        android:id="@+id/tv_id"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="20sp"
-        tools:text="00004032 " />
-  <TextView
-        android:id="@+id/tv_address"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="18sp"
-        tools:text="39 الجزيرة" />
-
-    <LinearLayout
+    <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:orientation="horizontal">
+        android:theme="@style/Theme.MyApplication.AppBarOverlay">
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_invoices"
-            android:layout_width="0dp"
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_back_arrow"
+            app:popupTheme="@style/Theme.MyApplication.PopupOverlay"
+
+            app:title="@string/options"
+            app:titleTextColor="@color/white">
+
+            <ImageView
+                android:id="@+id/iv_header_logo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="end"
+                android:paddingHorizontal="20dp"
+                android:src="@drawable/ic_header_logo" />
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout         android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F5F7FC"
+        android:gravity="center"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/invoices"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            app:backgroundTint="@color/white"
-            app:cornerRadius="15dp"
-            app:elevation="4dp"
-
-            app:icon="@drawable/ic_invoices"
-            app:iconGravity="textTop"
-            app:iconTintMode="multiply" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_receipts"
-            android:layout_width="0dp"
+            android:textColor="#1456B2"
+            android:textSize="24sp"
+            tools:text="محمد يسري أبو النور" />
+        <TextView
+            android:id="@+id/tv_id"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/receipts"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            app:backgroundTint="@color/white"
-            app:cornerRadius="15dp"
-            app:elevation="4dp"
-            app:icon="@drawable/ic_receipts"
-
-            app:iconGravity="textTop"
-            app:iconTintMode="multiply" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="128dp"
-        android:orientation="horizontal">
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_data_update"
-            android:layout_width="0dp"
-            android:layout_height="match_parent"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/data_update"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            app:backgroundTint="@color/white"
-            app:cornerRadius="15dp"
-            app:elevation="4dp"
-            app:icon="@drawable/ic_user_id"
-
-            app:iconGravity="textTop"
-            app:iconTintMode="multiply" />
-
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/btn_payment_notification"
-            android:layout_width="0dp"
+            android:textSize="20sp"
+            tools:text="00004032 " />
+        <TextView
+            android:id="@+id/tv_address"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="8dp"
-            android:layout_weight="1"
-            android:insetTop="0dp"
-            android:insetBottom="0dp"
-            android:text="@string/payment_notification"
-            android:textAllCaps="false"
-            android:textColor="@color/black"
-            android:textSize="22sp"
-            app:backgroundTint="@color/white"
-            app:cornerRadius="15dp"
-            app:elevation="4dp"
+            android:textSize="18sp"
+            tools:text="39 الجزيرة" />
 
-            app:icon="@drawable/ic_payment_notification"
-            app:iconGravity="textTop"
-            app:iconTintMode="multiply" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="128dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_invoices"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/invoices"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="15dp"
+                app:elevation="4dp"
+
+                app:icon="@drawable/ic_invoices"
+                app:iconGravity="textTop"
+                app:iconTintMode="multiply" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_receipts"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/receipts"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="15dp"
+                app:elevation="4dp"
+                app:icon="@drawable/ic_receipts"
+
+                app:iconGravity="textTop"
+                app:iconTintMode="multiply" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="128dp"
+            android:orientation="horizontal">
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_data_update"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/data_update"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="15dp"
+                app:elevation="4dp"
+                app:icon="@drawable/ic_user_id"
+
+                app:iconGravity="textTop"
+                app:iconTintMode="multiply" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_payment_notification"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="8dp"
+                android:layout_weight="1"
+                android:insetTop="0dp"
+                android:insetBottom="0dp"
+                android:text="@string/payment_notification"
+                android:textAllCaps="false"
+                android:textColor="@color/black"
+                android:textSize="22sp"
+                app:backgroundTint="@color/white"
+                app:cornerRadius="15dp"
+                app:elevation="4dp"
+
+                app:icon="@drawable/ic_payment_notification"
+                app:iconGravity="textTop"
+                app:iconTintMode="multiply" />
+
+        </LinearLayout>
+
 
     </LinearLayout>
 
 
 </LinearLayout>
+

@@ -3,16 +3,17 @@ package com.shady.boyot.ui.users
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
-import androidx.navigation.findNavController
 import com.shady.boyot.R
 import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.UsersAdapter
 import com.shady.boyot.databinding.FragmentUsersBinding
 import com.shady.domain.entity.beans.UserBean
+import com.shady.domain.entity.responses.BaseResponse
 import com.shady.domain.entity.responses.UsersResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -49,6 +50,24 @@ class UsersFragment : BaseFragment(), UsersAdapter.Listener {
         return binding.root
     }
 
+    override fun onLoading(isLoading: Boolean) {
+        super.onLoading(isLoading)
+        if (isLoading) {
+            binding.shimmer.visibility = VISIBLE
+            binding.rvUsers.visibility = GONE
+            binding.btnContinue.visibility = GONE
+            binding.tvNoResults.visibility = GONE
+        }
+    }
+
+    override fun onApiError(response: BaseResponse?) {
+        super.onApiError(response)
+        binding.shimmer.visibility = GONE
+        binding.rvUsers.visibility = GONE
+        binding.btnContinue.visibility = GONE
+        binding.tvNoResults.visibility = VISIBLE
+    }
+
     private fun init() {
         binding.swipeRefreshLayout.setOnRefreshListener {
             resetState()
@@ -61,13 +80,18 @@ class UsersFragment : BaseFragment(), UsersAdapter.Listener {
             navigate(R.id.global_action_back_to_users_search);
         }
         binding.btnContinue.setOnClickListener {
-            navigate(UsersFragmentDirections.actionNavUsersToNavOptions(userId, userName,userAddress))
+            navigate(
+                UsersFragmentDirections.actionNavUsersToNavOptions(
+                    userId,
+                    userName,
+                    userAddress
+                )
+            )
         }
         initUsersAdapter()
         initArguments()
         initObserves()
-        binding.shimmer.visibility = View.VISIBLE
-        binding.rvUsers.visibility = View.GONE
+
         requestUsers()
 
     }
@@ -114,9 +138,11 @@ class UsersFragment : BaseFragment(), UsersAdapter.Listener {
 
 
     private fun onUsersResponse(response: UsersResponse) {
-        binding.shimmer.visibility = View.GONE
-        binding.rvUsers.visibility = View.VISIBLE
+        binding.shimmer.visibility = GONE
+        binding.rvUsers.visibility = VISIBLE
+        binding.btnContinue.visibility = VISIBLE
         response.data?.let {
+            binding.tvNoResults.visibility = if (it.isEmpty()) VISIBLE else GONE
             usersAdapter.addData(it)
             onUserClick(it[0])
         }
@@ -132,8 +158,6 @@ class UsersFragment : BaseFragment(), UsersAdapter.Listener {
     private fun resetState() {
         viewModel.clear()
         usersAdapter.clear()
-        binding.shimmer.visibility = View.VISIBLE
-        binding.rvUsers.visibility = View.GONE
         requestUsers()
     }
 }

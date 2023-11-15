@@ -14,6 +14,7 @@ import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.InvoicesAdapter
 import com.shady.boyot.databinding.FragmentInvoicesBinding
 import com.shady.domain.entity.beans.InvoiceBean
+import com.shady.domain.entity.responses.BaseResponse
 import com.shady.domain.entity.responses.InvoicesResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -61,8 +62,6 @@ class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
         initInvoicesAdapter()
         initArguments()
         initObserves()
-        binding.shimmer.visibility = View.VISIBLE
-        binding.rvInvoices.visibility = View.GONE
         requestInvoices()
         binding.toolbar.title = "${getString(R.string.invoices)} $userName"
         binding.toolbar.title = getString(R.string.invoices_,  userName)
@@ -92,7 +91,22 @@ class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
 
     }
 
-
+    override fun onLoading(isLoading: Boolean) {
+        super.onLoading(isLoading)
+        if (isLoading) {
+            binding.shimmer.visibility = View.VISIBLE
+            binding.rvInvoices.visibility = View.GONE
+            binding.btnPayNow.visibility = View.GONE
+            binding.tvNoResults.visibility = View.GONE
+        }
+    }
+    override fun onApiError(response: BaseResponse?) {
+        super.onApiError(response)
+        binding.shimmer.visibility = View.GONE
+        binding.rvInvoices.visibility = View.GONE
+        binding.btnPayNow.visibility = View.GONE
+        binding.tvNoResults.visibility = View.VISIBLE
+    }
     fun requestInvoices() {
         val map = HashMap<String, String>()
         map["actor_id"] = userId;
@@ -103,7 +117,9 @@ class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
     private fun onInvoicesResponse(response: InvoicesResponse) {
         binding.shimmer.visibility = View.GONE
         binding.rvInvoices.visibility = View.VISIBLE
+        binding.btnPayNow.visibility = View.VISIBLE
         response.data?.let {
+            binding.tvNoResults.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             invoicesAdapter.addData(it)
         }
 
@@ -116,8 +132,6 @@ class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
     private fun resetState() {
         viewModel.clear()
         invoicesAdapter.clear()
-        binding.shimmer.visibility = View.VISIBLE
-        binding.rvInvoices.visibility = View.GONE
         requestInvoices()
     }
 }

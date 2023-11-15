@@ -25,7 +25,7 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvName.text = data[position].client_name
+        holder.binding.tvName.text = context.getString(R.string.invoice_, data[position].collection_date)
         holder.binding.tvInvoiceId.text = Html.fromHtml(
             context.getString(R.string.operation_number_, data[position].invoice_number)
         )

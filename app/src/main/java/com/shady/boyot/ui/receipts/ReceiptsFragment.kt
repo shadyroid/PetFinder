@@ -13,6 +13,7 @@ import com.shady.boyot.databinding.FragmentReceiptsBinding
 import com.shady.boyot.ui.checkout.CheckoutFragmentDirections
 import com.shady.boyot.ui.options.OptionsFragmentDirections
 import com.shady.domain.entity.beans.ReceiptBean
+import com.shady.domain.entity.responses.BaseResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -59,8 +60,6 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
         initReceiptsAdapter()
         initArguments()
         initObserves()
-        binding.shimmer.visibility = View.VISIBLE
-        binding.rvReceipts.visibility = View.GONE
         requestReceipts()
         binding.toolbar.title = "$userName ${getString(R.string.receipts)}"
 
@@ -102,6 +101,7 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
         binding.shimmer.visibility = View.GONE
         binding.rvReceipts.visibility = View.VISIBLE
         response.data?.let {
+            binding.tvNoResults.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             if (it.size == 0)
                 response.message?.let { appToast.showMessage(it) }
 
@@ -110,6 +110,22 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
 
     }
 
+    override fun onLoading(isLoading: Boolean) {
+        super.onLoading(isLoading)
+        if (isLoading) {
+            binding.shimmer.visibility = View.VISIBLE
+            binding.rvReceipts.visibility = View.GONE
+            binding.tvNoResults.visibility = View.GONE
+        }
+
+    }
+
+    override fun onApiError(response: BaseResponse?) {
+        super.onApiError(response)
+        binding.shimmer.visibility = View.GONE
+        binding.rvReceipts.visibility = View.GONE
+        binding.tvNoResults.visibility = View.VISIBLE
+    }
     override fun onReceiptClick(receipt: ReceiptBean) {
         navigate(ReceiptsFragmentDirections.actionNavReceiptsToNavReceiptDetails(receipt))
 
@@ -118,8 +134,6 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
     private fun resetState() {
         viewModel.clear()
         receiptsAdapter.clear()
-        binding.shimmer.visibility = View.VISIBLE
-        binding.rvReceipts.visibility = View.GONE
         requestReceipts()
     }
 }

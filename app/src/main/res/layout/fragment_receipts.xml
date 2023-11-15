@@ -75,7 +75,15 @@
                 android:layout_weight="1"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 tools:listitem="@layout/item_receipt" />
-
+            <TextView
+                android:id="@+id/tv_no_results"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:visibility="gone"
+                android:text="@string/no_results"
+                android:textSize="20sp"
+                android:textStyle="bold" />
         </LinearLayout>
 
 
