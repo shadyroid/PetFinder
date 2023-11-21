@@ -57,7 +57,9 @@
             app:destination="@id/nav_invoices" />
         <action
             android:id="@+id/action_nav_options_to_nav_receipts"
-            app:destination="@id/nav_receipts" />
+            app:destination="@id/nav_receipts" />   <action
+            android:id="@+id/action_nav_options_to_nav_payment_notification"
+            app:destination="@id/nav_payment_notification" />
         <argument
             android:name="userId"
             app:argType="string" />
@@ -172,6 +174,16 @@
         <argument
             android:name="receipt"
             app:argType="com.shady.domain.entity.beans.ReceiptBean" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_payment_notification"
+        android:name="com.shady.boyot.ui.payment_notification.PaymentNotificationFragment"
+        tools:layout="@layout/fragment_payment_notification">
+        <argument
+            android:name="userId"
+            app:argType="string" />
 
     </fragment>
 </navigation>

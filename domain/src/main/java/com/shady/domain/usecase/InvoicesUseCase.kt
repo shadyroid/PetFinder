@@ -5,6 +5,7 @@ import com.shady.domain.entity.responses.BuildingsResponse
 import com.shady.domain.entity.responses.CheckoutResponse
 import com.shady.domain.entity.responses.GenerateOrderIdResponse
 import com.shady.domain.entity.responses.InvoicesResponse
+import com.shady.domain.entity.responses.PaymentNotificationResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
 import com.shady.domain.entity.responses.UnitsResponse
 import com.shady.domain.repo.InvoicesRepo
@@ -29,6 +30,9 @@ suspend fun requestGenerateOrderId(request: CheckoutRequest): GenerateOrderIdRes
 
     suspend fun requestUnits(params: HashMap<String, String>): UnitsResponse =
         invoicesRepo.requestUnits(params)
+
+    suspend fun requestPaymentNotification(params: HashMap<String, String>): PaymentNotificationResponse =
+        invoicesRepo.requestPaymentNotification(params)
 
 
 }

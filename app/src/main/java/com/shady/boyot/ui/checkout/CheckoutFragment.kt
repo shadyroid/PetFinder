@@ -24,6 +24,7 @@ import com.shady.domain.entity.responses.CheckoutResponse
 import com.shady.domain.entity.responses.GenerateOrderIdResponse
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import java.util.Locale
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -91,11 +92,11 @@ class CheckoutFragment : BaseFragment() {
         binding.tvPaymentMethod.text = getString(
             if (paymentMethodId == 1) R.string.cash else R.string.visa
         )
-        binding.tvCost.text = getString(R.string._egp, String.format("%.2f", cost))
+        binding.tvCost.text = getString(R.string._egp, String.format(Locale.US,"%.2f", cost))
         binding.tvServiceExpenses.text =
-            getString(R.string._egp, String.format("%.2f", serviceExpenses))
-        binding.tvTax.text = getString(R.string._egp, String.format("%.2f", tax))
-        binding.tvTotalCost.text = getString(R.string._egp, String.format("%.2f", totalCost))
+            getString(R.string._egp, String.format(Locale.US,"%.2f", serviceExpenses))
+        binding.tvTax.text = getString(R.string._egp, String.format(Locale.US,"%.2f", tax))
+        binding.tvTotalCost.text = getString(R.string._egp, String.format(Locale.US,"%.2f", totalCost))
     }
 
     private fun initCheckoutsAdapter() {
@@ -141,7 +142,7 @@ class CheckoutFragment : BaseFragment() {
                     onTransactionRequestFailure = { payment, throwable ->
                         Toast.makeText(
                             requireContext(),
-                            "لم يتم الدف بسبب\n" + throwable?.message,
+                            "لم يتم الدفع بسبب\n" + throwable?.message,
                             Toast.LENGTH_SHORT
                         ).show()
                     }

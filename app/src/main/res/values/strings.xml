@@ -94,6 +94,9 @@
     <string name="no_results">No Results</string>
     <string name="options">Options</string>
     <string name="invoice_">Invoice: %1$s</string>
-    <string name="recipt_">Receipt: %1$s</string>
+    <string name="receipt_">Receipt: %1$s</string>
+    <string name="address_">Address: %1$s</string>
+    <string name="invoices_count">Invoices count</string>
+    <string name="invoices_total_cost">Invoices total cost</string>
 
 </resources>

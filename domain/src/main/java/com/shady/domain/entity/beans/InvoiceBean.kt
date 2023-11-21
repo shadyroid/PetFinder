@@ -9,10 +9,16 @@ data class InvoiceBean(
     val invoice_number: String?,
     val invoice_id: String?,
     val address: String?,
+    val unit_number: String?,
+    val region: String?,
     val total_amount: String?,
     val collection_date: String?,
 
-    ):Parcelable{
+    ) : Parcelable {
     @Transient
     var isSelected: Boolean = false
+
+    fun getFullAddress(): String {
+        return region + address + unit_number
+    }
 }

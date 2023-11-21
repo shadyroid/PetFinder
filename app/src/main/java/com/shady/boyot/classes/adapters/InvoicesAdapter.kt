@@ -29,7 +29,7 @@ class InvoicesAdapter @Inject constructor(@ActivityContext val context: Context)
         holder.binding.tvInvoiceId.text = Html.fromHtml(
             context.getString(R.string.operation_number_, data[position].invoice_number)
         )
-        holder.binding.tvAddress.text = data[position].address
+        holder.binding.tvAddress.text = context.getString(R.string.address_, data[position].getFullAddress())
         holder.binding.tvCost.text = context.getString(R.string._egp, data[position].total_amount)
         holder.binding.checkBox.isChecked = data[position].isSelected
     }

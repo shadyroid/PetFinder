@@ -22,7 +22,13 @@ data class ReceiptBean(
     val total_invoice: String?,
     val fees: String?,
     val total_payment: String?,
-    ) : Parcelable
+    ) : Parcelable{
+    fun getFullAddress(): String {
+        return "$region $address$ unit_number"
+    }
+    }
+
+
 
 //payment
 //"data": {

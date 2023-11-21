@@ -70,8 +70,7 @@ class ReceiptDetailsFragment : BaseFragment() {
         binding.tvReceiptId.text = Html.fromHtml(
             requireContext().getString(R.string.operation_number_, receipt.invoice_number)
         )
-        binding.tvAddress.text = receipt.address
-        binding.tvCost.text = requireContext().getString(R.string._egp, receipt.total_amount)
+        binding.tvAddress.text = requireContext().getString(R.string.address_, receipt.getFullAddress())
         binding.tvServiceType.text = receipt.service_type
         binding.tvClientName.text = receipt.client_name
         binding.tvClientPhone.text = receipt.client_phone
@@ -79,9 +78,11 @@ class ReceiptDetailsFragment : BaseFragment() {
         binding.tvUnitNumber.text = receipt.unit_number
         binding.tvRegion.text = receipt.region
         binding.tvPaymentMethod.text = receipt.payment_method
-        binding.tvInvoiceDate.text = receipt.invoice_date
-        binding.tvServiceExpenses.text = receipt.fees
         binding.tvTotalCost.text = receipt.total_amount
+
+        binding.tvContractType.text = receipt.service_type
+        binding.tvInvoiceNumber.text = receipt.invoice_number
+
     }
 
 

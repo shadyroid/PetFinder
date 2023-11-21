@@ -7,6 +7,7 @@ import com.shady.domain.entity.responses.CheckoutResponse
 import com.shady.domain.entity.responses.GenerateOrderIdResponse
 import com.shady.domain.entity.responses.InvoicesResponse
 import com.shady.domain.entity.responses.LoginResponse
+import com.shady.domain.entity.responses.PaymentNotificationResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
 import com.shady.domain.entity.responses.UnitsResponse
 import com.shady.domain.entity.responses.UserDetailsResponse
@@ -66,5 +67,8 @@ interface ApiService {
     @POST("/pos/generateOrderIds")
     suspend fun requestGenerateOrderId(@Body request: CheckoutRequest): GenerateOrderIdResponse
 
+    @FormUrlEncoded
+    @POST("/pos/printInvoicesUnPaid")
+    suspend fun requestPaymentNotification(@FieldMap body: HashMap<String, String>): PaymentNotificationResponse
 
 }

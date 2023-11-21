@@ -47,7 +47,7 @@ class OptionsFragment : BaseFragment() {
             navigate(OptionsFragmentDirections.actionNavOptionsToNavReceipts(userId, userName))
         }
         binding.btnPaymentNotification.setOnClickListener {
-//            navigate(OptionsFragmentDirections.actionNavOptionsToNavPaymentNotification())
+            navigate(OptionsFragmentDirections.actionNavOptionsToNavPaymentNotification(userId))
         }
         binding.btnDataUpdate.setOnClickListener {
             navigate(OptionsFragmentDirections.actionNavOptionsToNavEditUser(userId))

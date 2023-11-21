@@ -95,5 +95,9 @@
     <string name="no_results">لا توجد نتائج</string>
     <string name="options">خيارات</string>
     <string name="invoice_">فاتورة شهر: %1$s</string>
-    <string name="recipt_">إيصال دفع شهر : %1$s</string>
+    <string name="receipt_">إيصال دفع شهر : %1$s</string>
+    <string name="address_">العنوان : %1$s</string>
+    <string name="invoices_count">عدد الفواتير</string>
+    <string name="invoices_total_cost">قيمة الفواتير</string>
+
 </resources>
