@@ -96,8 +96,8 @@ class PaymentNotificationFragment : BaseFragment() {
         response.data?.let {
             binding.tvClientName.text = it.client_name
             binding.tvClientPhone.text = it.client_phone
-            binding.tvInvoicesCount.text = it.amount_of_invoices
-            binding.tvInvoicesTotalCost.text = it.total_invoices_not_paid
+            binding.tvInvoicesCount.text = it.total_invoices_not_paid
+            binding.tvInvoicesTotalCost.text = it.amount_of_invoices
             it.unit?.let {
                 unitsAdapter.addData(it)
             }
