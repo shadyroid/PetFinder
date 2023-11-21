@@ -3,6 +3,7 @@
     <string name="invoices">الفواتير</string>
     <string name="invoice_details">تفاصيل الفاتورة</string>
     <string name="invoices_">فواتير %1$s</string>
+    <string name="receipts_">ايصالات %1$s</string>
 
     <string name="name_is">الاسم: %1$s</string>
     <string name="gender_is">الجنس: %1$s</string>
@@ -99,5 +100,6 @@
     <string name="address_">العنوان : %1$s</string>
     <string name="invoices_count">عدد الفواتير</string>
     <string name="invoices_total_cost">قيمة الفواتير</string>
+    <string name="you_should_select_at_least_one_invoice">يجب أن تختار إيصال واحد على الأقل</string>
 
 </resources>

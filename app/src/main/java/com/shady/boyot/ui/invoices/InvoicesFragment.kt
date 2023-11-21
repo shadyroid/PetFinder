@@ -51,6 +51,10 @@ class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
             binding.swipeRefreshLayout.isRefreshing = false
         }
         binding.btnPayNow.setOnClickListener {
+            if (invoicesAdapter.getSelectedInvoicesCount()==0){
+                appToast.showMessage(getString(R.string.you_should_select_at_least_one_invoice))
+                return@setOnClickListener
+            }
             navigate(InvoicesFragmentDirections.actionNavInvoicesToNavPaymentMethods( Gson().toJson(invoicesAdapter.getSelectedInvoices())))
         }
         binding.toolbar.setNavigationOnClickListener {
@@ -63,7 +67,6 @@ class InvoicesFragment : BaseFragment(), InvoicesAdapter.Listener {
         initArguments()
         initObserves()
         requestInvoices()
-        binding.toolbar.title = "${getString(R.string.invoices)} $userName"
         binding.toolbar.title = getString(R.string.invoices_,  userName)
 
     }

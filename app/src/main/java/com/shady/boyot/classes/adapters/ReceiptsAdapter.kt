@@ -1,6 +1,7 @@
 package com.shady.boyot.classes.adapters
 
 import android.content.Context
+import android.text.Html
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -24,8 +25,8 @@ class ReceiptsAdapter @Inject constructor(@ActivityContext val context: Context)
     )
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.binding.tvName.text = context.getString(R.string.receipt_, data[position].collection_date)
-        holder.binding.tvReceiptId.text = data[position].receipt
+        holder.binding.tvName.text =  data[position].collection_date
+        holder.binding.tvReceiptId.text = Html.fromHtml(context.getString(R.string.operation_number_, data[position].receipt))
         holder.binding.tvAddress.text = context.getString(R.string.address_, data[position].getFullAddress())
         holder.binding.tvCost.text = context.getString(R.string._egp, data[position].total_amount)   }
 

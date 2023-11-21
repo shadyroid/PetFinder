@@ -19,6 +19,6 @@ data class InvoiceBean(
     var isSelected: Boolean = false
 
     fun getFullAddress(): String {
-        return region + address + unit_number
+        return "$region\n$unit_number\n$address"
     }
 }

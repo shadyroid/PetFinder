@@ -10,8 +10,6 @@ import com.shady.boyot.R
 import com.shady.boyot.base.BaseFragment
 import com.shady.boyot.classes.adapters.ReceiptsAdapter
 import com.shady.boyot.databinding.FragmentReceiptsBinding
-import com.shady.boyot.ui.checkout.CheckoutFragmentDirections
-import com.shady.boyot.ui.options.OptionsFragmentDirections
 import com.shady.domain.entity.beans.ReceiptBean
 import com.shady.domain.entity.responses.BaseResponse
 import com.shady.domain.entity.responses.ReceiptsResponse
@@ -54,15 +52,14 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
             popBackStack()
         }
 
-      binding.ivHeaderLogo.setOnClickListener {
-          navigate(R.id.global_action_back_to_users_search);
+        binding.ivHeaderLogo.setOnClickListener {
+            navigate(R.id.global_action_back_to_users_search);
         }
         initReceiptsAdapter()
         initArguments()
         initObserves()
         requestReceipts()
-        binding.toolbar.title = "$userName ${getString(R.string.receipts)}"
-
+        binding.toolbar.title = getString(R.string.receipts_, userName)
     }
 
     private fun initArguments() {
@@ -126,6 +123,7 @@ class ReceiptsFragment : BaseFragment(), ReceiptsAdapter.Listener {
         binding.rvReceipts.visibility = View.GONE
         binding.tvNoResults.visibility = View.VISIBLE
     }
+
     override fun onReceiptClick(receipt: ReceiptBean) {
         navigate(ReceiptsFragmentDirections.actionNavReceiptsToNavReceiptDetails(receipt))
 
