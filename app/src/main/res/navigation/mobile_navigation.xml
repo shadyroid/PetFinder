@@ -10,7 +10,7 @@
 
     <fragment
         android:id="@+id/nav_login"
-        android:name="com.shady.boyot.ui.login.LoginFragment"
+        android:name="com.boyot.collector.ui.login.LoginFragment"
         tools:layout="@layout/fragment_login">
         <action
             android:id="@+id/action_replace_nav_login_with_nav_users_search"
@@ -21,7 +21,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_users"
-        android:name="com.shady.boyot.ui.users.UsersFragment"
+        android:name="com.boyot.collector.ui.users.UsersFragment"
         android:label="@string/users"
         tools:layout="@layout/fragment_users">
         <action
@@ -50,7 +50,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_options"
-        android:name="com.shady.boyot.ui.options.OptionsFragment"
+        android:name="com.boyot.collector.ui.options.OptionsFragment"
         tools:layout="@layout/fragment_options">
         <action
             android:id="@+id/action_nav_options_to_nav_invoices"
@@ -75,7 +75,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_invoices"
-        android:name="com.shady.boyot.ui.invoices.InvoicesFragment"
+        android:name="com.boyot.collector.ui.invoices.InvoicesFragment"
         android:label="@string/invoices"
         tools:layout="@layout/fragment_invoices">
         <action
@@ -90,7 +90,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_users_search"
-        android:name="com.shady.boyot.ui.users_search.UsersSearchFragment"
+        android:name="com.boyot.collector.ui.users_search.UsersSearchFragment"
         android:label="@string/invoices_search"
         tools:layout="@layout/fragment_users_search">
         <action
@@ -99,7 +99,7 @@
     </fragment>
     <fragment
         android:id="@+id/nav_payment_methods"
-        android:name="com.shady.boyot.ui.payment_methods.PaymentMethodsFragment"
+        android:name="com.boyot.collector.ui.payment_methods.PaymentMethodsFragment"
         android:label="@string/payment_methods"
         tools:layout="@layout/fragment_payment_methods">
 
@@ -113,11 +113,11 @@
     </fragment>
     <fragment
         android:id="@+id/nav_no_internet_connection"
-        android:name="com.shady.boyot.ui.no_internet_connection.NoInternetConnectionFragment"
+        android:name="com.boyot.collector.ui.no_internet_connection.NoInternetConnectionFragment"
         tools:layout="@layout/fragment_no_internet_connection" />
     <fragment
         android:id="@+id/nav_receipts"
-        android:name="com.shady.boyot.ui.receipts.ReceiptsFragment"
+        android:name="com.boyot.collector.ui.receipts.ReceiptsFragment"
         android:label="@string/receipts"
         tools:layout="@layout/fragment_receipts">
         <action
@@ -135,7 +135,7 @@
          </fragment>
     <fragment
         android:id="@+id/nav_edit_user"
-        android:name="com.shady.boyot.ui.edit_user.EditUserFragment"
+        android:name="com.boyot.collector.ui.edit_user.EditUserFragment"
         tools:layout="@layout/fragment_edit_user">
         <argument
             android:name="userId"
@@ -147,13 +147,13 @@
     </fragment>
     <fragment
         android:id="@+id/nav_camera"
-        android:name="com.shady.boyot.ui.camera.CameraFragment"
+        android:name="com.boyot.collector.ui.camera.CameraFragment"
         tools:layout="@layout/fragment_camera" />
 
 
     <fragment
         android:id="@+id/nav_checkout"
-        android:name="com.shady.boyot.ui.checkout.CheckoutFragment"
+        android:name="com.boyot.collector.ui.checkout.CheckoutFragment"
         tools:layout="@layout/fragment_checkout">
         <argument
             android:name="invoices"
@@ -169,17 +169,17 @@
     </fragment>
     <fragment
         android:id="@+id/nav_receipt_details"
-        android:name="com.shady.boyot.ui.receipt_details.ReceiptDetailsFragment"
+        android:name="com.boyot.collector.ui.receipt_details.ReceiptDetailsFragment"
         tools:layout="@layout/fragment_receipt_details">
         <argument
             android:name="receipt"
-            app:argType="com.shady.domain.entity.beans.ReceiptBean" />
+            app:argType="com.boyot.collector.domain.entity.beans.ReceiptBean" />
 
     </fragment>
 
     <fragment
         android:id="@+id/nav_payment_notification"
-        android:name="com.shady.boyot.ui.payment_notification.PaymentNotificationFragment"
+        android:name="com.boyot.collector.ui.payment_notification.PaymentNotificationFragment"
         tools:layout="@layout/fragment_payment_notification">
         <argument
             android:name="userId"

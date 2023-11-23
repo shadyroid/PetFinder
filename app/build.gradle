@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace 'com.shady.boyot'
+    namespace 'com.boyot.collector'
     compileSdk 34
 
     defaultConfig {
-        applicationId "com.shady.boyot"
+        applicationId "com.boyot.collector"
         minSdk 25
         targetSdk 34
         versionCode 1

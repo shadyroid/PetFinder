@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace 'com.shady.domain'
+    namespace 'com.boyot.collector.domain'
     compileSdk 34
 
     defaultConfig {

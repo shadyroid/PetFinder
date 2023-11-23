@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">بيوت</string>
+    <string name="app_name">بيووت</string>
     <string name="invoices">الفواتير</string>
     <string name="invoice_details">تفاصيل الفاتورة</string>
     <string name="invoices_">فواتير %1$s</string>
